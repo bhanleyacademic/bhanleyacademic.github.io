@@ -4,3 +4,7 @@
     min-height: 100px;
     border: none;
 }
+nav{
+    float: right;
+    display: inline;
+}
