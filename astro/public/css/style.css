@@ -784,7 +784,7 @@ body.top_padding{
 /*	06	- Banner Section
 ----------------------------------------------*/
 .banner{
-    background-image: url(../../public/images/banner.jpg);
+    background-image: url(../images/banner.jpg);
     height: 100vh;
     background-size: cover;
     background-position: 50% 50%;
@@ -795,7 +795,7 @@ body.top_padding{
     padding-top: 90px;
 }
 .banner-02{
-    background-image: url(../../public/images/banner_02.png);
+    background-image: url(../images/banner_02.png);
 }
 .banner .banner_content{
     position: absolute;
