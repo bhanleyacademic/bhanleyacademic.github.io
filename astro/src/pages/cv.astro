@@ -3,6 +3,7 @@ import HeaderLink from "../components/HeaderLink.astro";
 import LeftNav from "../components/LeftNav.astro"
 import CVHead from "../components/CVHead.astro";
 import {SITE_TITLE} from "../consts";
+const year = new Date()
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -220,11 +221,11 @@ import {SITE_TITLE} from "../consts";
           <div class="portfolio_items">
             <div class="portfolio_item design illustration">
               <div class="pos_rel">
-                <img src="../astro/src/images/portfolio_01.jpg" alt="portfolio Image" class="img-responsive"/>
+                <img src="/images/portfolio_01.jpg" alt="portfolio Image" class="img-responsive"/>
                 <div class="overlay"></div>
                 <div class="port_caption">
-                  <a href="../astro/src/images/portfolio_big_06.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
-                  <a href="../astro/src/images/portfolio_big_01.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_06.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_01.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
                   <h4>Project Title Goes Here</h4>
                   <p>Logo Design</p>
                 </div>
@@ -232,11 +233,11 @@ import {SITE_TITLE} from "../consts";
             </div><!-- portfolio item -->
             <div class="portfolio_item photography vector">
               <div class="pos_rel">
-                <img src="../../public/images/portfolio_02.jpg" alt="portfolio Image" class="img-responsive"/>
+                <img src="/images/portfolio_02.jpg" alt="portfolio Image" class="img-responsive"/>
                 <div class="overlay"></div>
                 <div class="port_caption">
-                  <a href="../../public/images/portfolio_big_02.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
-                  <a href="../../public/images/portfolio_big_02.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_02.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_02.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
                   <h4>Project Title Goes Here</h4>
                   <p>Photography</p>
                 </div>
@@ -244,11 +245,11 @@ import {SITE_TITLE} from "../consts";
             </div><!-- portfolio item -->
             <div class="portfolio_item design illustration">
               <div class="pos_rel">
-                <img src="../../public/images/portfolio_03.jpg" alt="portfolio Image" class="img-responsive"/>
+                <img src="/images/portfolio_03.jpg" alt="portfolio Image" class="img-responsive"/>
                 <div class="overlay"></div>
                 <div class="port_caption">
-                  <a href="../../public/images/portfolio_big_03.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
-                  <a href="../../public/images/portfolio_big_03.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_03.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_03.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
                   <h4>Project Title Goes Here</h4>
                   <p>Illustration</p>
                 </div>
@@ -256,11 +257,11 @@ import {SITE_TITLE} from "../consts";
             </div><!-- portfolio item -->
             <div class="portfolio_item  vector">
               <div class="pos_rel">
-                <img src="../../public/images/portfolio_04.jpg" alt="portfolio Image" class="img-responsive"/>
+                <img src="/images/portfolio_04.jpg" alt="portfolio Image" class="img-responsive"/>
                 <div class="overlay"></div>
                 <div class="port_caption">
-                  <a href="../../public/images/portfolio_big_04.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
-                  <a href="../../public/images/portfolio_big_04.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_04.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_04.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
                   <h4>Project Title Goes Here</h4>
                   <p>Vector</p>
                 </div>
@@ -268,11 +269,11 @@ import {SITE_TITLE} from "../consts";
             </div><!-- portfolio item -->
             <div class="portfolio_item design illustration">
               <div class="pos_rel">
-                <img src="../../public/images/portfolio_05.jpg" alt="portfolio Image" class="img-responsive"/>
+                <img src="/images/portfolio_05.jpg" alt="portfolio Image" class="img-responsive"/>
                 <div class="overlay"></div>
                 <div class="port_caption">
-                  <a href="../../public/images/portfolio_big_05.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
-                  <a href="../../public/images/portfolio_big_05.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_05.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_05.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
                   <h4>Project Title Goes Here</h4>
                   <p>Illustration</p>
                 </div>
@@ -280,11 +281,11 @@ import {SITE_TITLE} from "../consts";
             </div><!-- portfolio item -->
             <div class="portfolio_item photography">
               <div class="pos_rel">
-                <img src="../../public/images/portfolio_06.jpg" alt="portfolio Image" class="img-responsive"/>
+                <img src="/images/portfolio_06.jpg" alt="portfolio Image" class="img-responsive"/>
                 <div class="overlay"></div>
                 <div class="port_caption">
-                  <a href="../../public/images/portfolio_big_06.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
-                  <a href="../../public/images/portfolio_big_06.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_06.jpg" class="image-icon" data-rel="lightcase:myCollection" title="Project Title"><i class="fa fa-search" aria-hidden="true"></i></a>
+                  <a href="/images/portfolio_big_06.jpg"><i class="fa fa-link" aria-hidden="true"></i></a>
                   <h4>Project Title Goes Here</h4>
                   <p>Photography</p>
                 </div>
@@ -383,7 +384,7 @@ import {SITE_TITLE} from "../consts";
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="blog_item">
                 <div class=" post-thumb">
-                  <a href="single.html"><img src="../astro/src/images/blog_01.jpg" alt="Blog image" class="img-responsive"></a>
+                  <a href="single.html"><img src="/images/blog_01.jpg" alt="Blog image" class="img-responsive"></a>
                 </div><!-- blog image -->
                 <div class=" content">
                   <h4><a href="single.html">Holisticly Incubate Enabled Value.</a></h4>
@@ -399,7 +400,7 @@ import {SITE_TITLE} from "../consts";
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="blog_item">
                 <div class=" post-thumb">
-                  <a href="single.html"><img src="../../public/images/blog_02.jpg" alt="Blog image" class="img-responsive"></a>
+                  <a href="single.html"><img src="/images/blog_02.jpg" alt="Blog image" class="img-responsive"></a>
                 </div><!-- blog image -->
                 <div class=" content">
                   <h4><a href="single.html">Compellingly Foster Premium Benefits.</a></h4>
@@ -576,12 +577,36 @@ import {SITE_TITLE} from "../consts";
 
       <!-- Footer section start here -->
       <footer>
-        <p>&#169; copyright <a href="#">Gantleman</a> 2016. All Right Reserved by <a href="#">Labartisan.</a></p>
+        <p>&#169; copyright <a href="/">{SITE_TITLE}</a> {year.getFullYear()}.</p>
       </footer>
       <!-- Footer section end here -->
 
     </div><!-- main content -->
+<!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i%7CPoppins:300,400,500,600,700" rel="stylesheet">
 
+    <!-- jQuery -->
+    <script is:inline src="/js/jquery.min.js"></script>
+    <script is:inline src="/js/bootstrap.min.js"></script>
+
+
+    <!-- Bootstrap Progressbar -->
+    <script is:inline src="/js/bootstrap-progressbar.js"></script>
+
+    <!-- Isotop -->
+    <script is:inline src="/js/isotope.pkgd.min.js"></script>
+
+    <!-- Lightcase -->
+    <script is:inline src="/js/lightcase.js"></script>
+
+    <!-- Easing -->
+    <script is:inline src="/js/jquery.easing.min.js"></script>
+
+    <!-- Slick -->
+    <script is:inline src="/js/slick.js"></script>
+
+    <!-- Custom -->
+    <script is:inline src="/js/custom.js"></script>
 
 
 
