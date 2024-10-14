@@ -1,0 +1,18 @@
+---
+import { date } from 'astro/zod';
+
+export interface Props {
+    institution: string,
+    time: string,
+    job_title: string,
+    location: string,
+    description: string,
+}
+
+const { institution, time, job_title, location, description } = Astro.props;
+---
+<div class="experience">
+                    <h4>{job_title}</h4>
+                    <p>{institution} / <span>{time}</span></p>
+                    <p class="ex_details">{description}</p>
+</div><!-- experience -->

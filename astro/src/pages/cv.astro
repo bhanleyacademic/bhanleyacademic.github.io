@@ -4,6 +4,16 @@ import LeftNav from "../components/LeftNav.astro"
 import CVHead from "../components/CVHead.astro";
 import {SITE_TITLE} from "../consts";
 const year = new Date()
+import CVEducation from "../components/CVEducation.astro";
+const educations = [
+    { institution:"Indiana University", time:"August 2023-Present", job_title:"Data Science & Anthropology Student", location:"Bloomington, IN", description:"Data Science and Anthropology" },
+    { institution:"Citrus College", time:"August 2020-June 2023", job_title:"Associate's Degree", location:"Azusa, CA", description:"Received associates of science in Computer Science and Psychology. Associates of art in Anthropology." }
+]
+const job_experience = [
+    { institution:"Citrus College", time:"February 2022-January 2024", job_title:"Professional Expert", location:"Azusa, CA", description:"Tutored students in English, Speech, and Anthropology." },
+    { institution:"American Bath Factory", time:"February 2011-January 2017", job_title:"IT Manager", location:"Corona, CA", description:"Managed all technology in the building." },
+
+]
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -78,6 +88,7 @@ const year = new Date()
 
               <div class="about_skills">
                 <h3>My Skills</h3>
+                <div id="skills"></div>
                 <div class="skills_progress">
                   <div class="progress_item">
                     <p class="progress_title">Photoshop</p>
@@ -115,6 +126,8 @@ const year = new Date()
                     <p class="progress_percent">60%</p>
                   </div>
                 </div><!-- skills progress -->
+
+
               </div><!-- about skills -->
             </div><!-- column -->
           </div><!--   -->
@@ -138,60 +151,18 @@ const year = new Date()
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <h3>Educational Experience</h3>
                 <div class="experiences left">
-
-                  <div class="experience">
-                    <h4>Master Degree</h4>
-                    <p>University of Oxford / <span>Jan 2015 - Dec 2017</span></p>
-                    <p class="ex_details">Uniquely incentivize process-centric systems for reliable market. Authoritatively scale next generation collaboration. Globally morph 24/365 e-commerce.</p>
-                  </div><!-- experience -->
-
-                  <div class="experience">
-                    <h4>Bachelors Degree</h4>
-                    <p>University of California / <span>Jan 2011 - Dec 2015</span></p>
-                    <p class="ex_details">Uniquely incentivize process-centric systems for reliable market. Authoritatively scale next generation collaboration. Globally morph 24/365 e-commerce.</p>
-                  </div><!-- experience -->
-
-                  <div class="experience">
-                    <h4>Deploma Engineering</h4>
-                    <p>Stanford University / <span>Jan 2008 - Dec 2011</span></p>
-                    <p class="ex_details">Uniquely incentivize process-centric systems for reliable market. Authoritatively scale next generation collaboration. Globally morph 24/365 e-commerce.</p>
-                  </div><!-- experience -->
-
-                  <div class="experience">
-                    <h4>Higher Secondary</h4>
-                    <p>Stanford University / <span>Jan 2006 - Dec 2008</span></p>
-                    <p class="ex_details">Uniquely incentivize process-centric systems for reliable market. Authoritatively scale next generation collaboration. Globally morph 24/365 e-commerce.</p>
-                  </div><!-- experience -->
-
+                  {educations.map((education) => (
+                    <CVEducation institution={education.institution} time={education.time} job_title={education.job_title} location={education.location} description={education.description} />)
+                  )}
                 </div><!-- experience -->
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <h3>Working Experience</h3>
                 <div class="experiences right">
 
-                  <div class="experience">
-                    <h4>Lead UI/UX Designer</h4>
-                    <p>CodexCoder / <span>Jan 2014 - Dec 2017</span></p>
-                    <p class="ex_details">Uniquely incentivize process-centric systems for reliable market. Authoritatively scale next generation collaboration. Globally morph 24/365 e-commerce.</p>
-                  </div><!-- experience -->
-
-                  <div class="experience">
-                    <h4>UI/UX Designer</h4>
-                    <p>Webcode Ltd. / <span>Jan 2012 - Dec 2014</span></p>
-                    <p class="ex_details">Uniquely incentivize process-centric systems for reliable market. Authoritatively scale next generation collaboration. Globally morph 24/365 e-commerce.</p>
-                  </div><!-- experience -->
-
-                  <div class="experience">
-                    <h4>Senior Graphic Designer</h4>
-                    <p>Webcode Ltd. / <span>Jan 2012 - May 2012</span></p>
-                    <p class="ex_details">Uniquely incentivize process-centric systems for reliable market. Authoritatively scale next generation collaboration. Globally morph 24/365 e-commerce.</p>
-                  </div><!-- experience -->
-
-                  <div class="experience">
-                    <h4>Graphic Designer</h4>
-                    <p>Webcode Ltd. / <span>Jan 2011 - Dec 2012</span></p>
-                    <p class="ex_details">Uniquely incentivize process-centric systems for reliable market. Authoritatively scale next generation collaboration. Globally morph 24/365 e-commerce.</p>
-                  </div><!-- experience -->
+                  {job_experience.map((job_experience) => (
+                    <CVEducation institution={job_experience.institution} time={job_experience.time} job_title={job_experience.job_title} location={job_experience.location} description={job_experience.description} />)
+                  )}
 
                 </div><!-- experience -->
               </div>
@@ -607,9 +578,25 @@ const year = new Date()
 
     <!-- Custom -->
     <script is:inline src="/js/custom.js"></script>
+    <!-- Plotly -->
+    <script is:inline src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 
+    <script is:inline>data = [{
+      type: "treemap",
+      labels: ["","Languages","Visualization","Environments", "Python", "PHP", "Tableau", "C#", "C++", "JavaScript", "LAMP", "HTML5"],
+      parents: ["", "My Skills","My Skills","My Skills","Languages", "Languages", "Visualization", "Visualization", "Languages", "Languages", "Environments", "Languages" ],
+      values: [0,22,4,13,6],
+      textinfo: "label+value years",
+}];
+      Plotly.newPlot('skills',data)</script>
 
+  <!--<script is:inline>data = [{
+      type: "treemap",
+      labels: ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+      parents: ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ]
+}]
 
+Plotly.newPlot('skills', data)</script>-->
 
 
 
