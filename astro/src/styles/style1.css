@@ -12,7 +12,7 @@ body { margin:0; font:12px Tahoma; color:#d8f2ff; background:url(../images/bg2.j
 	
 	#left_column { width:195px; float:left; }
 	.horizontal #left_column { width:auto; float:none; }
-		#navigation a { background:url(/sow/images/button_bg2.gif) no-repeat; width:170px; height:25px; display:block; padding-left:25px; margin:5px 0;
+		#navigation a, summary { background:url(/sow/images/button_bg2.gif) no-repeat; width:170px; height:25px; display:block; padding-left:25px; margin:5px 0;
 						font-size:13px; color:white; text-decoration:none; line-height:25px;}
 		#navigation a:hover { background-position:0 bottom;  }
 		.horizontal #navigation a { float:left; } 
@@ -48,3 +48,4 @@ body { margin:0; font:12px Tahoma; color:#d8f2ff; background:url(../images/bg2.j
 	main {background: rgba(45, 57, 66, 0.75);
 		border-radius: 5px;
 	}
+	summary{width:95%; background-size: cover}
