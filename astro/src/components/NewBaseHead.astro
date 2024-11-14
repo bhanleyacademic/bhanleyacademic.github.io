@@ -1,0 +1,36 @@
+---
+import '../styles/brands.min.css'
+import '../styles/bootstrap.min.css'
+import '../styles/font-awesome.min.css'
+import '../styles/themify-icons.css'
+import '../styles/elegant-icons.css'
+import '../styles/flaticon-set.css'
+import '../styles/magnific-popup.css'
+import '../styles/swiper-bundle.min.css'
+import '../styles/animate.css'
+import '../styles/validnavs.css'
+import '../styles/helper.css'
+import '../styles/unit-test.css'
+import '../styles/style.css'
+
+
+const {title, description, author, url, image} = Astro.props;
+---
+<!-- ========== Meta Tags ========== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content={description}>
+
+    <!-- ========== Page Title ========== -->
+    <title>{title}</title>
+
+    <!-- ========== Favicon Icon ========== -->
+    <link rel="shortcut icon" href="/logo-square.png" type="image/x-icon">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5/html5shiv.min.js"></script>
+      <script src="/js/html5/respond.min.js"></script>
+    <![endif]-->
