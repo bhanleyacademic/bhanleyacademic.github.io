@@ -2,7 +2,13 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Image from 'astro:assets';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+const presentations = [
+    {course: "INFO-I400 Creativity, Innovation & Tech", presentation_title: "The Cost of Creativity", link:"https://docs.google.com/presentation/d/1WjG7Uu1qqN8in_QAQAFYQSH8yGOr_zhnHcHnQKvsJos/edit?usp=sharing", image: "/the-cost-of-creativity.png"},
+    {course: "INFO-I400 Creativity, Innovation & Tech", presentation_title: "Imitators in Streaming Services", link:"https://docs.google.com/presentation/d/1zOvXUreW2UYo2rc7NO4jrsa_WiSOwnKZHoW5AXAGaPc/edit?usp=sharing", image: "/imitators-in-streaming-services.png"},
+    {course: "INFO-I400 Creativity, Innovation & Tech", presentation_title: "Consumer-Driven Innovation", link:"https://docs.google.com/presentation/d/1FxGmZJahpn3XRRF0acd3RuvW72GkizlraeTkFnYmtWc/edit?usp=sharing", image: "/consumer-driven-innovation.png"},
+]
 ---
 <!doctype html>
 <html lang="en">
@@ -12,9 +18,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
         <main>
-            <a href="https://docs.google.com/presentation/d/1WjG7Uu1qqN8in_QAQAFYQSH8yGOr_zhnHcHnQKvsJos/edit?usp=sharing" target='_self'>INFO-I400 Creativity, Innovation &amp; Tech - Personal Creativity Presentation</a>
-<a href="https://docs.google.com/presentation/d/1zOvXUreW2UYo2rc7NO4jrsa_WiSOwnKZHoW5AXAGaPc/edit?usp=sharing" target='_self'>INFO-I400 Creativity, Innovation &amp; Tech - Imitators in Streaming Services</a>
-
+            <div class="container">
+                <div class="row">
+                    {presentations.map(presentation => (
+                            <div class="col-6"> <a href={presentation.link} target='_self'><img src={presentation.image} alt={presentation.presentation_title} /><br /><div style="text-align: center">{presentation.course} - {presentation.presentation_title}</div></a></div>
+                    ))}
+                </div>
+            </div>
         </main>
 
         <Footer />
