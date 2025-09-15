@@ -2,7 +2,7 @@
 title: 'Secrets of IU Financial Aid'
 description: 'Understanding the ins and outs of financial aid at Indiana University can be daunting. This guide aims to simplify the process, providing clarity on application procedures, types of aid available, and tips for maximizing your financial support.'
 pubDate: 'Sep 15 2025'
-heroImage: '/secrets.png'
+heroImage: '/secrets.jpg'
 ---
 
 # Introduction
