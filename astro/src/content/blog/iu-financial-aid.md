@@ -12,6 +12,18 @@ Financial aid at IU is designed to help students cover the costs of tuition, fee
 # Your Cost of Attendance
 Before applying for financial aid, it's essential to understand your Cost of Attendance (COA). The COA includes tuition and fees, room and board, books and supplies, transportation, and personal expenses. IU provides an estimated COA for different student categories, which can be found on their [financial aid website](https://financialaid.iu.edu/).
 ![Cost of Attendance](/fa-hero.png)
-
+## <span style="color:#990000;">Tuition and Mandatory Fees (On your bill)</span>
+These are the costs directly billed to you by IU, including:
+- Tuition
+- Mandatory fees (e.g., student activity fee, technology fee)
+## Housing and Food (Sometimes on your bill)
+These costs may be billed by IU if you live in university housing or purchase a meal plan. They include:
+- Room (housing)
+- Board (meal plans)
+## Indirect Costs (Not on your bill)
+These are estimated costs that you will incur while attending IU, such as:
+- Books and supplies
+- Transportation
+- Personal expenses
 # Types of Financial Aid Available
 IU offers several types of financial aid to help students manage their educational expenses:
