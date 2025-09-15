@@ -5,8 +5,6 @@ pubDate: 'Sep 15 2025'
 heroImage: '/secrets.jpg'
 ---
 
-# Introduction
-Navigating the world of financial aid can be overwhelming for students and parents alike. Indiana University (IU) offers a variety of financial aid options to help make higher education more affordable. This comprehensive guide aims to demystify the financial aid process at IU, providing clarity on application procedures, types of aid available, and tips for maximizing your financial support.
 # Understanding Financial Aid at IU
 Financial aid at IU is designed to help students cover the costs of tuition, fees, room and board, books, and other educational expenses. The aid can come in various forms, including grants, scholarships, loans, and work-study opportunities.
 # Your Cost of Attendance
@@ -25,5 +23,10 @@ These are estimated costs that you will incur while attending IU, such as:
 - Books and supplies
 - Transportation
 - Personal expenses
-# Types of Financial Aid Available
-IU offers several types of financial aid to help students manage their educational expenses:
+
+# Did I get double charged for tuition and fees?
+No, you did not get double charged. Tuition and Student Services Fees are two separate components of your overall cost of attendance. Tuition covers the cost of your education, while Student Services Fees fund various student services and activities on campus. The fees change based on your enrollment status (full-time or part-time) and the number of credit hours you are taking.  
+![Multiple Charges](/tuition-line-item.png)
+
+When you change how many credit hours you are taking, your tuition and fees will adjust accordingly. For example, if you drop from 12 credit hours to 9 credit hours, your tuition will decrease because you are taking fewer classes. However, some fees may remain the same regardless of your credit hours, while others may change based on your enrollment status.  
+![Tuition Adjustment](/timeline.png)
