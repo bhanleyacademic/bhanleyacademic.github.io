@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Symbol Decoder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inconsolata:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fdf6e3;
+    --paper2: #f5ead0;
+    --ink: #2c1810;
+    --ink-light: #6b4c3b;
+    --ink-muted: #a08070;
+    --red: #c0392b;
+    --blue: #1a5276;
+    --green: #1e6641;
+    --amber: #d4840a;
+    --purple: #6c3483;
+    --teal: #117a65;
+    --border: #d4b896;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 27px,
+        rgba(180,140,100,0.12) 28px
+      );
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px 30px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--amber) 0, var(--amber) 12px, transparent 12px, transparent 16px);
+  }
+  .header-tag {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.72em;
+    letter-spacing: 4px;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8em, 5vw, 3em);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .header h1 em { color: var(--amber); font-style: italic; }
+  .header p {
+    font-size: 0.95em;
+    color: rgba(253,246,227,0.65);
+    max-width: 480px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  /* FILTER TABS */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--paper2);
+  }
+  .filter-btn {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .filter-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
+
+  /* SYMBOL CARD */
+  .sym-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 0;
+    margin: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .sym-card:hover {
+    box-shadow: 4px 4px 0 var(--border);
+    transform: translate(-2px, -2px);
+  }
+  .sym-card.expanded {
+    box-shadow: 6px 6px 0 var(--ink-light);
+    transform: translate(-3px, -3px);
+  }
+
+  /* COLOR ACCENT STRIPE */
+  .sym-card::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: var(--card-color, var(--ink));
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 22px 16px;
+  }
+
+  .big-symbol {
+    font-size: 3.2em;
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+    color: var(--card-color, var(--ink));
+    min-width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .card-meta { flex: 1; min-width: 0; }
+
+  .sym-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .sym-latex {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.78em;
+    color: var(--ink-muted);
+    background: var(--paper2);
+    padding: 2px 8px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .sym-oneliner {
+    font-size: 0.88em;
+    color: var(--ink-light);
+    font-weight: 300;
+  }
+
+  .expand-hint {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.68em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 0 22px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .expand-hint::before { content: '▸'; transition: transform 0.2s; }
+  .expanded .expand-hint::before { content: '▾'; }
+
+  /* EXPANDED CONTENT */
+  .card-detail {
+    display: none;
+    padding: 0 22px 22px;
+    border-top: 1px dashed var(--border);
+    margin: 0 22px;
+  }
+  .expanded .card-detail { display: block; padding-top: 16px; }
+
+  .memory-hook {
+    background: var(--paper2);
+    border-left: 3px solid var(--card-color, var(--ink));
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 0.88em;
+    line-height: 1.6;
+    border-radius: 0 4px 4px 0;
+  }
+  .memory-hook strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 1em;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--card-color, var(--ink));
+  }
+
+  .example-box {
+    margin: 12px 0 0;
+    font-size: 0.86em;
+  }
+  .example-box .ex-label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .example-box .ex-line {
+    background: var(--paper2);
+    padding: 8px 12px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    margin-bottom: 5px;
+    line-height: 1.5;
+    font-family: 'Inconsolata', monospace;
+    font-size: 1em;
+  }
+  .ex-sym { color: var(--card-color, var(--ink)); font-weight: 600; font-size: 1.1em; }
+  .ex-plain { color: var(--ink-muted); font-size: 0.85em; font-family: 'Lato', sans-serif; display: block; margin-top: 2px; }
+
+  /* SECTION LABELS */
+  .section-label {
+    grid-column: 1 / -1;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3em;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--ink-light);
+    padding: 16px 8px 4px;
+    border-bottom: 2px solid var(--border);
+    margin: 8px 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label span {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.6em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  /* PROFESSOR NOTE */
+  .prof-note {
+    background: #fef9ee;
+    border: 1.5px solid var(--amber);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 14px 8px;
+    font-size: 0.9em;
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .prof-icon { font-size: 1.5em; flex-shrink: 0; }
+  .prof-note strong { color: var(--amber); display: block; margin-bottom: 4px; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-family: 'Inconsolata', monospace; }
+
+  /* HIDDEN */
+  .hidden { display: none; }
+
+  @media(max-width: 500px) {
+    .grid { padding: 12px; }
+    .sym-card { margin: 5px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-tag">D321 · Symbol Reference</span>
+  <h1>The <em>Decoder Ring</em><br>for Math Symbols</h1>
+  <p>Every symbol explained with a shape-based memory hook. Click any card to unlock the full breakdown.</p>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filter('all')">All Symbols</button>
+  <button class="filter-btn" onclick="filter('sets')">Set Theory</button>
+  <button class="filter-btn" onclick="filter('logic')">Logic</button>
+  <button class="filter-btn" onclick="filter('relational')">Relational Algebra</button>
+  <button class="filter-btn" onclick="filter('quantifiers')">Quantifiers</button>
+</div>
+
+<div class="grid" id="grid">
+
+  <!-- ===================== SET THEORY ===================== -->
+  <div class="section-label" data-cat="sets">Set Theory <span>∪ ∩ ∈ ⊆ ∅ A'</span></div>
+
+  <!-- UNION -->
+  <div class="sym-card" data-cat="sets" style="--card-color: #1a5276;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">∪</div>
+      <div class="card-meta">
+        <div class="sym-name">Union</div>
+        <div class="sym-latex">\cup</div>
+        <div class="sym-oneliner">Everything in A, or B, or both</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🪣 Shape Hook: "U = United bucket"</strong>
+        The ∪ looks like a bucket or cup. It <em>collects everything</em> — pour both sets in, keep everything. No throwing anything away.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          {1,2,3} <span class="ex-sym">∪</span> {3,4,5} = {1,2,3,4,5}
+          <span class="ex-plain">→ dump both buckets together (no duplicates)</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">∪</span> A' = <b>U</b>
+          <span class="ex-plain">→ A plus everything-not-A = the whole universe</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">∪</span> ∅ = A
+          <span class="ex-plain">→ A plus nothing = still just A</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERSECTION -->
+  <div class="sym-card" data-cat="sets" style="--card-color: #117a65;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">∩</div>
+      <div class="card-meta">
+        <div class="sym-name">Intersection</div>
+        <div class="sym-latex">\cap</div>
+        <div class="sym-oneliner">Only what's in BOTH A and B</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>⛺ Shape Hook: "∩ = tent / roof — only what shelters under BOTH"</strong>
+        Flip the ∪ upside down. Now it's a tent or an arch. It only protects what's underneath <em>both</em> sets. If something is only in A but not B, it's out in the rain.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          {1,2,3} <span class="ex-sym">∩</span> {3,4,5} = {3}
+          <span class="ex-plain">→ only 3 lives in both sets</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">∩</span> A' = <b>∅</b>
+          <span class="ex-plain">→ A AND not-A simultaneously = nothing can satisfy that</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">∩</span> U = A
+          <span class="ex-plain">→ A overlapping with everything = still just A</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELEMENT OF -->
+  <div class="sym-card" data-cat="sets" style="--card-color: #6c3483;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">∈</div>
+      <div class="card-meta">
+        <div class="sym-name">Element of</div>
+        <div class="sym-latex">\in</div>
+        <div class="sym-oneliner">This thing IS inside that set</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🚪 Shape Hook: "∈ = a thing walking through a door into a set"</strong>
+        It's like a warped "E" or an arrow pointing right into a curved wall. The thing on the left is <em>entering</em> the set on the right. It belongs there.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          3 <span class="ex-sym">∈</span> {1, 2, 3, 4}
+          <span class="ex-plain">→ "3 is a member of this set" ✓</span>
+        </div>
+        <div class="ex-line">
+          (x, y) <span class="ex-sym">∈</span> Knows
+          <span class="ex-plain">→ "the pair (x,y) exists in the Knows relation"</span>
+        </div>
+        <div class="ex-line">
+          5 <span class="ex-sym">∉</span> {1, 2, 3}
+          <span class="ex-plain">→ ∉ = NOT element of (door is blocked)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBSET -->
+  <div class="sym-card" data-cat="sets" style="--card-color: #c0392b;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">⊆</div>
+      <div class="card-meta">
+        <div class="sym-name">Subset of</div>
+        <div class="sym-latex">\subseteq</div>
+        <div class="sym-oneliner">Every item in A is also in B</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🐣 Shape Hook: "⊆ = a smaller C inside a bigger one, with a floor"</strong>
+        The curve opens toward the bigger set. Think of it like ≤ but for sets — "contained in or equal to." The line under it means "or exactly equal."  ⊂ (no line) means strictly smaller.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          {1,2} <span class="ex-sym">⊆</span> {1,2,3,4}
+          <span class="ex-plain">→ every item in the left set is in the right set ✓</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">⊆</span> U
+          <span class="ex-plain">→ any set is a subset of the universal set</span>
+        </div>
+        <div class="ex-line">
+          M ∩ A <span class="ex-sym">⊆</span> M
+          <span class="ex-plain">→ American mathematicians are still mathematicians</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLEMENT -->
+  <div class="sym-card" data-cat="sets" style="--card-color: #d4840a;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">A′</div>
+      <div class="card-meta">
+        <div class="sym-name">Complement</div>
+        <div class="sym-latex">A' \text{ or } \bar{A}</div>
+        <div class="sym-oneliner">Everything in U that is NOT in A</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🔄 Memory Hook: "The ' flips the set inside-out"</strong>
+        The apostrophe (prime) after a set name means: take the whole universe U and remove A. What's left is A'. Also written as Ā (A with a bar on top) or ¬A in logic.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          If A = {cats}, then <span class="ex-sym">A'</span> = {everything that is NOT a cat}
+          <span class="ex-plain">→ dogs, tables, stars, you... everything except cats</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">∪</span> A' = U &nbsp;&nbsp;&nbsp; A <span class="ex-sym">∩</span> A' = ∅
+          <span class="ex-plain">→ A and not-A together = everything; A and not-A overlap = nothing</span>
+        </div>
+        <div class="ex-line">
+          (A')' = A
+          <span class="ex-plain">→ flip it twice = back to the original (double complement)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMPTY SET -->
+  <div class="sym-card" data-cat="sets" style="--card-color: #566573;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">∅</div>
+      <div class="card-meta">
+        <div class="sym-name">Empty Set</div>
+        <div class="sym-latex">\emptyset</div>
+        <div class="sym-oneliner">The set that contains nothing</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🚫 Shape Hook: "∅ = a zero with a slash — zero things inside"</strong>
+        Also written as {} or { }. It's a valid set — it just happens to be completely empty. Think of it as an empty box. Very different from 0 (which is a number, not a set).
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          A <span class="ex-sym">∩</span> A' = ∅
+          <span class="ex-plain">→ nothing can be in A AND not-A at the same time</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">∪</span> ∅ = A
+          <span class="ex-plain">→ adding nothing to A changes nothing</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">∩</span> ∅ = ∅
+          <span class="ex-plain">→ intersecting with nothing gives nothing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================== LOGIC ===================== -->
+  <div class="section-label" data-cat="logic">Logic Connectives <span>→ ↔ ∧ ∨ ¬</span></div>
+
+  <!-- IMPLIES -->
+  <div class="sym-card" data-cat="logic" style="--card-color: #1a5276;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">→</div>
+      <div class="card-meta">
+        <div class="sym-name">Implies / If…Then</div>
+        <div class="sym-latex">\rightarrow</div>
+        <div class="sym-oneliner">If A is true, then B must be true</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🚦 Memory Hook: "The arrow FORCES traffic one way"</strong>
+        A → B means: if you're in A, you <em>must</em> end up in B. It's a one-way guarantee. It doesn't say anything about what happens if you're NOT in A.
+        <br><br>
+        <strong>Critical translation:</strong> A → B = A' ∪ B ("either A is false, or B is true — one of those must hold")
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          "It rains" <span class="ex-sym">→</span> "the ground is wet"
+          <span class="ex-plain">→ If it rained, ground must be wet. (Ground could be wet for other reasons too.)</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">→</span> B = A' ∪ B
+          <span class="ex-plain">→ this is the implication law — KEY for Q11!</span>
+        </div>
+        <div class="ex-line">
+          A <span class="ex-sym">→</span> B = B' → A'
+          <span class="ex-plain">→ contrapositive: same meaning, direction flipped (and both negated)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BICONDITIONAL -->
+  <div class="sym-card" data-cat="logic" style="--card-color: #117a65;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">↔</div>
+      <div class="card-meta">
+        <div class="sym-name">Biconditional / If and only if</div>
+        <div class="sym-latex">\leftrightarrow</div>
+        <div class="sym-oneliner">A is true exactly when B is true</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>↔ Memory Hook: "Two-way street — both must agree"</strong>
+        ↔ is two → arrows pointing both ways. A ↔ B means A → B AND B → A. They rise and fall together. If A is true, B is true. If A is false, B is false. Also called "iff" (if and only if).
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          A <span class="ex-sym">↔</span> B = (A → B) ∩ (B → A)
+          <span class="ex-plain">→ both directions must hold</span>
+        </div>
+        <div class="ex-line">
+          "You pass iff you score ≥ 60"
+          <span class="ex-plain">→ pass→score≥60 AND score≥60→pass (they're equivalent)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AND (logic) -->
+  <div class="sym-card" data-cat="logic" style="--card-color: #1e6641;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">∧</div>
+      <div class="card-meta">
+        <div class="sym-name">Logical AND</div>
+        <div class="sym-latex">\wedge \text{ or } \cdot</div>
+        <div class="sym-oneliner">Both A and B must be true</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🏔 Shape Hook: "∧ = a mountain — you need to climb BOTH sides"</strong>
+        It looks like an uppercase A without the crossbar, or a mountain peak. Both conditions must be true to reach the top. In circuit diagrams this is the AND gate. In set theory, ∧ corresponds to ∩.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          "Raining" <span class="ex-sym">∧</span> "Cold" → bring umbrella AND coat
+          <span class="ex-plain">→ both must be true for the whole thing to be true</span>
+        </div>
+        <div class="ex-line">
+          In sets: A <span class="ex-sym">∧</span> B ≡ A ∩ B
+          <span class="ex-plain">→ AND in logic = intersection in set theory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OR (logic) -->
+  <div class="sym-card" data-cat="logic" style="--card-color: #6c3483;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">∨</div>
+      <div class="card-meta">
+        <div class="sym-name">Logical OR</div>
+        <div class="sym-latex">\vee \text{ or } +</div>
+        <div class="sym-oneliner">At least one of A or B is true</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🪂 Shape Hook: "∨ = a V or a parachute — either side can carry you"</strong>
+        The opposite of ∧. Flip the mountain upside down — now it's a valley or a V. Either path works. Only fails if BOTH are false. In set theory, ∨ corresponds to ∪.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          "Sunny" <span class="ex-sym">∨</span> "Warm" → go outside
+          <span class="ex-plain">→ either one (or both!) being true is enough</span>
+        </div>
+        <div class="ex-line">
+          In sets: A <span class="ex-sym">∨</span> B ≡ A ∪ B
+          <span class="ex-plain">→ OR in logic = union in set theory</span>
+        </div>
+        <div class="ex-line">
+          A → B = A' <span class="ex-sym">∨</span> B = A' <span class="ex-sym">∪</span> B
+          <span class="ex-plain">→ implication uses OR/union under the hood</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOT -->
+  <div class="sym-card" data-cat="logic" style="--card-color: #c0392b;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">¬</div>
+      <div class="card-meta">
+        <div class="sym-name">Logical NOT</div>
+        <div class="sym-latex">\neg \text{ or } ' \text{ or } \bar{A}</div>
+        <div class="sym-oneliner">Flips true↔false</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>↩ Memory Hook: "¬ = a hook that pulls things back to the opposite"</strong>
+        ¬A means "not A." In set notation it's A' (prime) or Ā (bar). They all mean the same thing: flip it. True becomes false, false becomes true. In 1's complement binary, NOT flips every bit.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          <span class="ex-sym">¬</span>True = False &nbsp;&nbsp; <span class="ex-sym">¬</span>False = True
+          <span class="ex-plain">→ complete reversal</span>
+        </div>
+        <div class="ex-line">
+          ¬A = A' = Ā
+          <span class="ex-plain">→ all three notations mean the same thing</span>
+        </div>
+        <div class="ex-line">
+          De Morgan: <span class="ex-sym">¬</span>(A ∧ B) = ¬A ∨ ¬B
+          <span class="ex-plain">→ NOT(A AND B) = NOT-A OR NOT-B</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DE MORGAN NOTE -->
+  <div class="prof-note" data-cat="logic">
+    <span class="prof-icon">💡</span>
+    <div>
+      <strong>Quick cheat: De Morgan's Laws</strong>
+      These let you "push" a NOT inside parentheses. The rules: flip ∩↔∪ and distribute the NOT. <br>
+      <b>(A ∩ B)' = A' ∪ B'</b> &nbsp;&nbsp; "NOT(both) = NOT-A or NOT-B" &nbsp;|&nbsp;
+      <b>(A ∪ B)' = A' ∩ B'</b> &nbsp;&nbsp; "NOT(either) = NOT-A and NOT-B"
+    </div>
+  </div>
+
+
+  <!-- ===================== RELATIONAL ALGEBRA ===================== -->
+  <div class="section-label" data-cat="relational">Relational Algebra <span>π σ ⋈ ×</span></div>
+
+  <div class="prof-note" data-cat="relational">
+    <span class="prof-icon">🎓</span>
+    <div>
+      <strong>Your Professor's Trick (expanded)</strong>
+      Think of a database table as a spreadsheet. <b>Columns</b> are the types of data (Name, Age, City). <b>Rows</b> are the actual records (Alice, 30, NYC). Relational algebra operators let you slice and dice those tables.
+    </div>
+  </div>
+
+  <!-- PI - PROJECTION -->
+  <div class="sym-card" data-cat="relational" style="--card-color: #1a5276;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">π</div>
+      <div class="card-meta">
+        <div class="sym-name">Projection</div>
+        <div class="sym-latex">\pi</div>
+        <div class="sym-oneliner">Pick which COLUMNS you want</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>📊 Your Professor's Hook: "π = pick columns"</strong>
+        π projects down onto selected columns — like a projector shining light only on part of the table. The subscript tells you which columns to keep. You get back a narrower table (fewer columns), same rows.
+        <br><br>Think of π like SELECT in SQL — "give me only these fields."
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          <span class="ex-sym">π</span>₁(Knows)
+          <span class="ex-plain">→ keep only column 1 (the "knower") from the Knows relation</span>
+        </div>
+        <div class="ex-line">
+          <span class="ex-sym">π</span>_{Name,Age}(People)
+          <span class="ex-plain">→ from the People table, return only the Name and Age columns</span>
+        </div>
+        <div class="ex-line">
+          <span class="ex-sym">π</span>₁(Knows ⋈ (A ∩ M))
+          <span class="ex-plain">→ after joining, grab just the first column = the "people who know American mathematicians"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGMA - SELECTION -->
+  <div class="sym-card" data-cat="relational" style="--card-color: #117a65;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">σ</div>
+      <div class="card-meta">
+        <div class="sym-name">Selection</div>
+        <div class="sym-latex">\sigma</div>
+        <div class="sym-oneliner">Filter which ROWS you want</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🔍 Your Professor's Hook: "σ = search rows (like a sieve)"</strong>
+        σ looks like a 6 with a slash — imagine it as a filter or sieve. It keeps only the rows that pass a condition. You get back a shorter table (fewer rows), same columns.
+        <br><br>Think of σ like WHERE in SQL — "only give me rows where this condition is true."
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          <span class="ex-sym">σ</span>_{Age > 30}(People)
+          <span class="ex-plain">→ return only rows where Age > 30</span>
+        </div>
+        <div class="ex-line">
+          <span class="ex-sym">σ</span>_{City = "NYC"}(People)
+          <span class="ex-plain">→ return only New Yorkers from the People table</span>
+        </div>
+        <div class="ex-line">
+          <span class="ex-sym">π</span>_{Name}(<span class="ex-sym">σ</span>_{Age>30}(People))
+          <span class="ex-plain">→ first filter rows (σ), then pick columns (π) — like SQL WHERE then SELECT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOIN -->
+  <div class="sym-card" data-cat="relational" style="--card-color: #6c3483;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">⋈</div>
+      <div class="card-meta">
+        <div class="sym-name">Natural Join</div>
+        <div class="sym-latex">\bowtie</div>
+        <div class="sym-oneliner">Combine two tables on matching values</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🎀 Shape Hook: "⋈ = bow-tie — two tables meet in the middle"</strong>
+        The bowtie shape shows two things merging at a point. A join takes two relations (tables) and combines rows that "match" on shared columns or conditions. The result has columns from both tables.
+        <br><br>Think of ⋈ like JOIN in SQL.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          Knows <span class="ex-sym">⋈</span> (A ∩ M)
+          <span class="ex-plain">→ pair up Knows with American Mathematicians — rows where the "known person" is in A∩M</span>
+        </div>
+        <div class="ex-line">
+          Students <span class="ex-sym">⋈</span> Grades
+          <span class="ex-plain">→ combine student info with their grades, matched by student ID</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CROSS PRODUCT -->
+  <div class="sym-card" data-cat="relational" style="--card-color: #c0392b;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">×</div>
+      <div class="card-meta">
+        <div class="sym-name">Cross Product / Cartesian Product</div>
+        <div class="sym-latex">\times</div>
+        <div class="sym-oneliner">Every possible pairing of rows from both tables</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🎲 Memory Hook: "× = every combination, like a menu"</strong>
+        A × B gives you every possible (a, b) pair where a is from A and b is from B. If A has 3 rows and B has 4 rows, A × B has 12 rows. It's used to define relations and joins in formal math. Also appears as U×U in the Knows relation definition.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          {1,2} <span class="ex-sym">×</span> {a,b} = {(1,a),(1,b),(2,a),(2,b)}
+          <span class="ex-plain">→ every combination of one item from each set</span>
+        </div>
+        <div class="ex-line">
+          Knows ⊆ U <span class="ex-sym">×</span> U
+          <span class="ex-plain">→ Knows is a subset of all possible (person, person) pairs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================== QUANTIFIERS ===================== -->
+  <div class="section-label" data-cat="quantifiers">Quantifiers <span>∀ ∃</span></div>
+
+  <!-- FOR ALL -->
+  <div class="sym-card" data-cat="quantifiers" style="--card-color: #d4840a;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">∀</div>
+      <div class="card-meta">
+        <div class="sym-name">For All / Universal Quantifier</div>
+        <div class="sym-latex">\forall</div>
+        <div class="sym-oneliner">This is true for EVERY single item</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🔃 Shape Hook: "∀ = upside-down A — All starts with A"</strong>
+        It's literally an upside-down A — for <b>A</b>ll. When you see ∀x, read it as "for every possible x." The statement after it must hold for every single member of the set, no exceptions.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          <span class="ex-sym">∀</span>x ∈ A: x is a person
+          <span class="ex-plain">→ every element of A is a person (no exceptions)</span>
+        </div>
+        <div class="ex-line">
+          "Philosophers who ONLY know mathematicians" uses <span class="ex-sym">∀</span>
+          <span class="ex-plain">→ for ALL y that p knows, y must be a mathematician</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THERE EXISTS -->
+  <div class="sym-card" data-cat="quantifiers" style="--card-color: #117a65;" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="big-symbol">∃</div>
+      <div class="card-meta">
+        <div class="sym-name">There Exists / Existential Quantifier</div>
+        <div class="sym-latex">\exists</div>
+        <div class="sym-oneliner">At least one item makes this true</div>
+      </div>
+    </div>
+    <div class="expand-hint">memory hook + examples</div>
+    <div class="card-detail">
+      <div class="memory-hook">
+        <strong>🔎 Shape Hook: "∃ = backwards E — Exists starts with E"</strong>
+        It's a mirror-image E, for <b>E</b>xists. When you see ∃x, read it as "there is at least one x such that..." You only need ONE example where the condition is true for the whole statement to hold.
+      </div>
+      <div class="example-box">
+        <span class="ex-label">Examples</span>
+        <div class="ex-line">
+          <span class="ex-sym">∃</span>x ∈ A ∩ M: person knows x
+          <span class="ex-plain">→ "there is at least one American mathematician that this person knows"</span>
+        </div>
+        <div class="ex-line">
+          ∀ vs <span class="ex-sym">∃</span>: "All dogs bite" vs "Some dog bites"
+          <span class="ex-plain">→ ∀ needs every case to work; ∃ just needs one</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CHEATSHEET -->
+  <div class="prof-note" data-cat="all" style="background:#f0f8ff; border-color: #1a5276;">
+    <span class="prof-icon">🗺️</span>
+    <div>
+      <strong>The Logic ↔ Set ↔ SQL Rosetta Stone</strong>
+      <br>
+      <table style="margin-top:8px; font-size:0.9em; border-collapse:collapse; width:100%;">
+        <tr style="border-bottom:1px solid #ccc;">
+          <th style="text-align:left; padding:4px 12px 4px 0; font-family:'Inconsolata',monospace; font-size:0.85em; color:#566573;">Logic</th>
+          <th style="text-align:left; padding:4px 12px; font-family:'Inconsolata',monospace; font-size:0.85em; color:#566573;">Sets</th>
+          <th style="text-align:left; padding:4px 0; font-family:'Inconsolata',monospace; font-size:0.85em; color:#566573;">Plain English</th>
+        </tr>
+        <tr><td style="padding:4px 12px 4px 0;">A ∧ B</td><td style="padding:4px 12px;">A ∩ B</td><td style="padding:4px 0;">A AND B (both)</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;">A ∨ B</td><td style="padding:4px 12px;">A ∪ B</td><td style="padding:4px 0;">A OR B (either)</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;">¬A</td><td style="padding:4px 12px;">A'</td><td style="padding:4px 0;">NOT A (flip it)</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;">A → B</td><td style="padding:4px 12px;">A' ∪ B</td><td style="padding:4px 0;">If A then B</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;">∀x P(x)</td><td style="padding:4px 12px;">every element</td><td style="padding:4px 0;">For ALL x</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;">∃x P(x)</td><td style="padding:4px 12px;">at least one element</td><td style="padding:4px 0;">There EXISTS an x</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;">π (projection)</td><td style="padding:4px 12px;">pick columns</td><td style="padding:4px 0;">SQL SELECT</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;">σ (selection)</td><td style="padding:4px 12px;">filter rows</td><td style="padding:4px 0;">SQL WHERE</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- end grid -->
+
+<script>
+function toggle(card) {
+  const wasExpanded = card.classList.contains('expanded');
+  document.querySelectorAll('.sym-card').forEach(c => c.classList.remove('expanded'));
+  if (!wasExpanded) card.classList.add('expanded');
+}
+
+function filter(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  document.querySelectorAll('.sym-card, .section-label, .prof-note').forEach(el => {
+    const elCat = el.dataset.cat;
+    if (cat === 'all' || elCat === cat || elCat === 'all') {
+      el.classList.remove('hidden');
+    } else {
+      el.classList.add('hidden');
+    }
+  });
+}
+</script>
+
+</body>
+</html>

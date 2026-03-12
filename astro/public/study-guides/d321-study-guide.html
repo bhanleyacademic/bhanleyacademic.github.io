@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D321 Exam Study Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #f0f4ff; color: #1a1a2e; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #6c63ff, #3f3d56);
+    color: white; text-align: center; padding: 40px 20px;
+  }
+  .header h1 { font-size: 2.2em; margin-bottom: 8px; }
+  .header p { font-size: 1.1em; opacity: 0.85; }
+
+  .toc {
+    background: white; max-width: 900px; margin: 30px auto; padding: 25px 35px;
+    border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .toc h2 { color: #6c63ff; margin-bottom: 15px; font-size: 1.3em; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .toc a {
+    text-decoration: none; color: #3f3d56;
+    padding: 8px 14px; border-radius: 8px;
+    background: #f0f4ff; display: block; font-size: 0.95em;
+    transition: all 0.2s;
+  }
+  .toc a:hover { background: #6c63ff; color: white; }
+
+  .section {
+    max-width: 900px; margin: 20px auto; padding: 0 16px;
+  }
+
+  .card {
+    background: white; border-radius: 16px; padding: 28px 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07); margin-bottom: 20px;
+    border-left: 6px solid #6c63ff;
+  }
+  .card.green { border-left-color: #43b97f; }
+  .card.orange { border-left-color: #ff7043; }
+  .card.pink { border-left-color: #e91e8c; }
+  .card.teal { border-left-color: #00bcd4; }
+  .card.purple { border-left-color: #9c27b0; }
+  .card.yellow { border-left-color: #ffc107; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    background: linear-gradient(90deg, #6c63ff, #3f3d56);
+    color: white; padding: 16px 24px; border-radius: 12px;
+    margin-bottom: 16px; margin-top: 30px;
+  }
+  .section-header.green { background: linear-gradient(90deg, #43b97f, #2e7d59); }
+  .section-header.orange { background: linear-gradient(90deg, #ff7043, #bf360c); }
+  .section-header.pink { background: linear-gradient(90deg, #e91e8c, #880e4f); }
+  .section-header.teal { background: linear-gradient(90deg, #00bcd4, #006064); }
+  .section-header.yellow { background: linear-gradient(90deg, #ffc107, #e65100); }
+
+  .section-header h2 { font-size: 1.3em; }
+  .emoji { font-size: 1.6em; }
+
+  h3 { color: #3f3d56; font-size: 1.1em; margin: 16px 0 8px; }
+  p { margin-bottom: 10px; font-size: 0.97em; }
+
+  .pill {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: 0.82em; font-weight: 600; margin: 3px 2px;
+  }
+  .pill.purple { background: #ede7f6; color: #6c63ff; }
+  .pill.green { background: #e8f5e9; color: #2e7d32; }
+  .pill.orange { background: #fff3e0; color: #e65100; }
+  .pill.red { background: #ffebee; color: #c62828; }
+  .pill.teal { background: #e0f7fa; color: #006064; }
+
+  .answer-box {
+    background: #f8f5ff; border: 2px dashed #6c63ff;
+    border-radius: 10px; padding: 14px 18px; margin: 10px 0;
+    font-size: 0.95em;
+  }
+  .answer-box.green { background: #f1fff8; border-color: #43b97f; }
+  .answer-box.orange { background: #fff8f5; border-color: #ff7043; }
+  .answer-box.yellow { background: #fffde7; border-color: #ffc107; }
+
+  .key { font-weight: 700; color: #6c63ff; }
+  .key.green { color: #2e7d32; }
+  .key.orange { color: #e65100; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9em; }
+  th { background: #6c63ff; color: white; padding: 10px 14px; text-align: left; }
+  td { padding: 9px 14px; border-bottom: 1px solid #e0e0e0; }
+  tr:nth-child(even) td { background: #f8f5ff; }
+
+  .code {
+    background: #1a1a2e; color: #a8ff78; padding: 12px 16px;
+    border-radius: 8px; font-family: monospace; font-size: 0.88em;
+    margin: 10px 0; white-space: pre-wrap;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 10px 0; }
+  @media(max-width: 600px) { .two-col { grid-template-columns: 1fr; } .toc-grid { grid-template-columns: 1fr; } }
+
+  .mini-card {
+    background: #f8f5ff; border-radius: 10px; padding: 14px 16px;
+    border: 1px solid #d4c8ff;
+  }
+  .mini-card.green { background: #f1fff8; border-color: #b2dfdb; }
+  .mini-card.orange { background: #fff8f5; border-color: #ffccbc; }
+  .mini-card h4 { font-size: 0.95em; margin-bottom: 6px; color: #3f3d56; }
+
+  .warn { background: #fff3e0; border-left: 4px solid #ffc107; padding: 10px 14px; border-radius: 6px; margin: 10px 0; font-size: 0.9em; }
+  .info { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 10px 14px; border-radius: 6px; margin: 10px 0; font-size: 0.9em; }
+
+  .points { float: right; background: #ede7f6; color: #6c63ff; padding: 3px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+  .q-label { color: #6c63ff; font-weight: 700; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+
+  footer { text-align: center; padding: 30px; color: #888; font-size: 0.85em; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🧠 D321 Data Representation — Exam Study Guide</h1>
+  <p>ADHD-Friendly • All Questions + Answers from Review Slides • Spring 2026</p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h2>📋 What's on the Exam?</h2>
+  <div class="toc-grid">
+    <a href="#q1">Q1 — Fibonacci: Recursive vs Iterative (5 pts)</a>
+    <a href="#q2">Q2 — Circular Doubly Linked List (4 pts)</a>
+    <a href="#q3">Q3 — Min/Max Heap Trees (8 pts)</a>
+    <a href="#q4">Q4 — Hash Table Collisions (8 pts)</a>
+    <a href="#q5">Q5 — Binary Arithmetic (10 pts)</a>
+    <a href="#q6">Q6 — Binary Conversions (10 pts)</a>
+    <a href="#q7">Q7 — Logic Gates (5 pts)</a>
+    <a href="#q8">Q8 — ASCII Encoding (5 pts)</a>
+    <a href="#q9">Q9 — BoW & One-Hot Encoding (10 pts)</a>
+    <a href="#q10">Q10 — Set Relations (10 pts)</a>
+    <a href="#q11">Q11 — Set Algebra Simplification (10 pts)</a>
+    <a href="#q12">Q12 — Complex Numbers & Fourier (15 pts)</a>
+  </div>
+</div>
+
+<!-- SECTION 1: DATA STRUCTURES -->
+<div class="section">
+  <div class="section-header" id="q1">
+    <span class="emoji">🔁</span>
+    <h2>Q1 — Fibonacci: Recursive vs. Iterative</h2>
+    <span class="points">5 pts</span>
+  </div>
+
+  <div class="card">
+    <div class="q-label">The Question</div>
+    <p>Discuss the differences between recursive and iterative solutions for Fibonacci in terms of <strong>time complexity</strong>.</p>
+    <div class="two-col">
+      <div class="mini-card green">
+        <h4>✅ Iterative — O(n)</h4>
+        <p>Uses a loop. Calculates each number once. <strong>Linear time</strong> — scales well.</p>
+        <div class="code">fib = 0, 1
+for i in range(n-1):
+    fib = prev + fib</div>
+      </div>
+      <div class="mini-card orange">
+        <h4>⚠️ Recursive — O(2ⁿ)</h4>
+        <p>Calls itself twice at each step. <strong>Exponential time</strong> — gets incredibly slow fast!</p>
+        <div class="code">def fib(n):
+    if n<=1: return n
+    return fib(n-1)+fib(n-2)</div>
+      </div>
+    </div>
+    <div class="answer-box">
+      <span class="key">📝 Key Answer:</span> Iterative is <strong>far more efficient</strong> — O(n) vs O(2ⁿ). As n grows, recursive becomes exponentially slower because it recalculates subproblems repeatedly. Iterative just loops once through.
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="section-header green" id="q2">
+    <span class="emoji">🔗</span>
+    <h2>Q2 — Linked Lists & Memory</h2>
+    <span class="points">4 pts</span>
+  </div>
+
+  <div class="card green">
+    <div class="q-label">Part A — What type of list is shown?</div>
+    <p>The diagram shows nodes with arrows going <em>both directions</em> and the last node connects back to the first.</p>
+    <div class="answer-box green">
+      <span class="key green">✅ Answer:</span> <strong>Circular Doubly Linked List</strong> — each node has a NEXT pointer AND a PREVIOUS pointer, and the tail connects back to the head.
+    </div>
+
+    <h3>The 4 Types of Linked Lists — Quick Reference</h3>
+    <table>
+      <tr><th>Type</th><th>Direction</th><th>Last → First?</th><th>Real Use</th></tr>
+      <tr><td>Singly Linked</td><td>One way →</td><td>No</td><td>Simple lists</td></tr>
+      <tr><td>Circular Singly</td><td>One way →</td><td>Yes ↩</td><td>Chess game turns</td></tr>
+      <tr><td>Doubly Linked</td><td>Both ↔</td><td>No</td><td>Music player (fwd/back)</td></tr>
+      <tr><td><strong>Circular Doubly</strong></td><td>Both ↔</td><td>Yes ↩</td><td>Mac app switcher (⌘+Tab)</td></tr>
+    </table>
+
+    <div class="q-label" style="margin-top:16px;">Part B — Memory allocation</div>
+    <div class="answer-box green">
+      <span class="key green">✅ Answer:</span> Unlike arrays (contiguous memory), a linked list stores nodes in <strong>scattered/random memory locations</strong>. Each node holds: (1) the data value, (2) a pointer to the NEXT node, and (3) in doubly linked: a pointer to the PREVIOUS node. The pointers connect the scattered pieces together.
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="section-header orange" id="q3">
+    <span class="emoji">🌲</span>
+    <h2>Q3 — Min & Max Heap Trees</h2>
+    <span class="points">8 pts</span>
+  </div>
+
+  <div class="card orange">
+    <div class="q-label">Part A — What are Min/Max Heaps?</div>
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>🔽 Min Heap</h4>
+        <p>Every parent is <strong>smaller</strong> than its children. The <strong>root = smallest</strong> element.</p>
+      </div>
+      <div class="mini-card orange">
+        <h4>🔼 Max Heap</h4>
+        <p>Every parent is <strong>larger</strong> than its children. The <strong>root = largest</strong> element.</p>
+      </div>
+    </div>
+
+    <div class="q-label" style="margin-top:16px;">Part B — Build a heap from: [1, 4, 8, 48, 12, 15, 22]</div>
+    <div class="answer-box orange">
+      <span class="key orange">📝 Process (Max Heap example):</span>
+      <ol style="margin-top:8px; padding-left:20px;">
+        <li>Insert all elements into a complete binary tree in order</li>
+        <li>Start at index n/2 (middle), work backwards to root</li>
+        <li><strong>"Bubble down"</strong> each element — swap parent with the larger child if parent is smaller</li>
+        <li>Result: Root = 48 (largest), every parent > its children</li>
+      </ol>
+    </div>
+    <div class="warn">💡 <strong>Remember:</strong> A heap is a <em>complete</em> binary tree — every level is filled left to right before going to the next level.</div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="section-header pink" id="q4">
+    <span class="emoji">🗂️</span>
+    <h2>Q4 — Hash Tables & Collision Resolution</h2>
+    <span class="points">8 pts</span>
+  </div>
+
+  <div class="card pink">
+    <div class="q-label">Part A — What is a collision?</div>
+    <div class="answer-box">
+      <span class="key">✅ Answer:</span> A <strong>hash collision</strong> occurs when two different pieces of data produce the <strong>same hash value</strong>, mapping them to the same slot in the hash table.
+    </div>
+
+    <div class="q-label" style="margin-top:16px;">Part B — Two Collision Resolution Strategies</div>
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>1️⃣ Direct Chaining (Linked List)</h4>
+        <p>When two keys collide, create a <strong>linked list</strong> at that slot. All colliding values go into the same chain.</p>
+        <p><em>Think: each table slot is a bucket with a chain hanging from it</em></p>
+      </div>
+      <div class="mini-card orange">
+        <h4>2️⃣ Linear Probing (Open Addressing)</h4>
+        <p>If a slot is full, move to the <strong>next available slot</strong> (decrease index by 1). Wraps around to the end if needed.</p>
+        <p><em>Problem: "clustering" — slots fill up in groups, slowing things down</em></p>
+      </div>
+    </div>
+    <div class="info">🔑 <strong>Also know:</strong> Double hashing — uses a second hash function to calculate how many slots to jump, solving the clustering problem of linear probing.</div>
+
+    <h3>For the exam table (PHL=4, ORY=8, GCM=6...):</h3>
+    <p>Apply linear probing: if the target slot is taken, keep decrementing the index until you find an empty slot. Apply chaining: if the slot is taken, add to the linked list at that position.</p>
+  </div>
+</div>
+
+<!-- SECTION 2: BINARY -->
+<div class="section">
+  <div class="section-header teal" id="q5">
+    <span class="emoji">🔢</span>
+    <h2>Q5 — Binary Arithmetic</h2>
+    <span class="points">10 pts</span>
+  </div>
+
+  <div class="card teal">
+    <div class="q-label">Part A — Binary Multiplication: B = 111.0011 × C = 1.00101</div>
+    <div class="answer-box yellow">
+      <span class="key orange">📝 Partial Sum Method:</span>
+      <ol style="margin-top:8px; padding-left:20px;">
+        <li>Ignore decimal point, multiply as whole numbers</li>
+        <li>For each bit in C (right to left): if bit = 1, write B shifted left; if bit = 0, write zeros</li>
+        <li>Add all partial products in binary</li>
+        <li>Count total decimal places in both numbers, place the decimal point that many positions from the right</li>
+      </ol>
+    </div>
+    <div class="warn">⚠️ B has 4 decimal places + C has 5 decimal places = <strong>9 decimal places</strong> in the answer</div>
+
+    <div class="q-label" style="margin-top:16px;">Part B — Binary Addition: B + C</div>
+    <table>
+      <tr><th>Rule</th><th>Result</th><th>Carry</th></tr>
+      <tr><td>0 + 0</td><td>0</td><td>0</td></tr>
+      <tr><td>0 + 1 or 1 + 0</td><td>1</td><td>0</td></tr>
+      <tr><td>1 + 1</td><td>0</td><td>1</td></tr>
+      <tr><td>1 + 1 + 1 (with carry)</td><td>1</td><td>1</td></tr>
+    </table>
+    <div class="answer-box">
+      <span class="key">📝 Steps:</span> Align decimal points. Add bit by bit from right to left, carrying over when needed. The exam answer for 111.0011 + 1.00101 = <strong>1000.10001</strong> (align and carry carefully!). The slide answer shows: <strong>00100.010</strong>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="section-header teal" id="q6">
+    <span class="emoji">🔄</span>
+    <h2>Q6 — Number System Conversions from 11011.101</h2>
+    <span class="points">10 pts</span>
+  </div>
+
+  <div class="card teal">
+    <h3>Starting number: <code style="background:#e0f7fa;padding:2px 8px;border-radius:4px;">11011.101</code></h3>
+
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>a) → Hexadecimal</h4>
+        <p>Group bits in <strong>sets of 4</strong> from the decimal point outward</p>
+        <p>Integer: <code>0001 1011</code> → <code>1B</code></p>
+        <p>Fraction: <code>.1010</code> → <code>.A</code></p>
+        <div class="answer-box"><strong>Answer: 1B.A</strong></div>
+      </div>
+      <div class="mini-card orange">
+        <h4>b) → Octal</h4>
+        <p>Group bits in <strong>sets of 3</strong> from the decimal point outward</p>
+        <p>Integer: <code>011 011</code> → <code>33</code></p>
+        <p>Fraction: <code>.101</code> → <code>.5</code></p>
+        <div class="answer-box orange"><strong>Answer: 33.5</strong></div>
+      </div>
+    </div>
+
+    <div class="mini-card" style="margin-top:14px;">
+      <h4>c) → IEEE 754 (32-bit floating point)</h4>
+      <ol style="padding-left:20px; font-size:0.93em; margin-top:6px;">
+        <li>Determine the <strong>sign bit</strong>: positive = <code>0</code></li>
+        <li><strong>Normalize:</strong> write as 1.xxxxx × 2ⁿ → 11011.101 = 1.1011101 × 2⁴</li>
+        <li><strong>Exponent:</strong> 4 + 127 (bias) = 131 → <code>10000011</code></li>
+        <li><strong>Mantissa:</strong> the bits after the "1." = <code>1011101</code>, pad to 23 bits with zeros</li>
+        <li>Combine: <code>0 | 10000011 | 10111010000000000000000</code></li>
+      </ol>
+    </div>
+
+    <div class="mini-card" style="margin-top:14px;">
+      <h4>d) → First Complement (1's Complement)</h4>
+      <p>Simply <strong>flip every bit</strong>: 0→1 and 1→0</p>
+      <p><code>11011.101</code> → <strong><code>00100.010</code></strong></p>
+      <div class="answer-box"><strong>Answer: 00100.010</strong> ✓ (confirmed in slides)</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: CHARACTER ENCODING -->
+<div class="section">
+  <div class="section-header" style="background: linear-gradient(90deg, #9c27b0, #4a148c);" id="q7">
+    <span class="emoji">⚡</span>
+    <h2>Q7 — Logic Gates Expression</h2>
+    <span class="points">5 pts</span>
+  </div>
+
+  <div class="card purple">
+    <p>The circuit diagram shows: <strong>A & B</strong> feed into an AND gate, <strong>B & C</strong> feed into an OR gate, then that feeds into an AND gate, and both AND results feed into a final OR gate.</p>
+
+    <div class="answer-box">
+      <span class="key">✅ Answer from slides:</span>
+      <p style="font-size:1.3em; text-align:center; margin:10px 0; font-weight:bold;">Q = AB + BC</p>
+      <p>Read the circuit: AND gate gives A·B, the OR→AND path gives B·C, and the final OR gate combines them.</p>
+    </div>
+
+    <h3>Logic Gate Quick Reference:</h3>
+    <table>
+      <tr><th>Gate</th><th>Symbol</th><th>Rule</th></tr>
+      <tr><td>AND</td><td>·</td><td>Output 1 only if ALL inputs are 1</td></tr>
+      <tr><td>OR</td><td>+</td><td>Output 1 if ANY input is 1</td></tr>
+      <tr><td>NOT</td><td>A'</td><td>Flips the input</td></tr>
+      <tr><td>NAND</td><td>(A·B)'</td><td>AND then NOT</td></tr>
+      <tr><td>NOR</td><td>(A+B)'</td><td>OR then NOT</td></tr>
+      <tr><td>XOR</td><td>⊕</td><td>Output 1 if inputs are DIFFERENT</td></tr>
+    </table>
+  </div>
+
+  <!-- Q8 -->
+  <div class="section-header" style="background: linear-gradient(90deg, #9c27b0, #4a148c);" id="q8">
+    <span class="emoji">🔤</span>
+    <h2>Q8 — ASCII Decoding</h2>
+    <span class="points">5 pts</span>
+  </div>
+
+  <div class="card purple">
+    <p>Decode: <code style="background:#ede7f6; padding:2px 8px; border-radius:4px;">01001110 01101111 00100001</code></p>
+    <div class="info">💡 <strong>How to use ASCII:</strong> Split the 8 bits into two groups of 4. The first 4 bits = the row, the last 4 bits = the column (or just convert each byte to decimal and look up the character).</div>
+
+    <div class="answer-box">
+      <span class="key">✅ How to decode each byte:</span>
+      <ul style="padding-left:20px; margin-top:6px;">
+        <li><code>01001110</code> → decimal 78 → <strong>N</strong></li>
+        <li><code>01101111</code> → decimal 111 → <strong>o</strong></li>
+        <li><code>00100001</code> → decimal 33 → <strong>!</strong></li>
+      </ul>
+      <p style="margin-top:10px; font-size:1.2em; font-weight:bold;">Answer: "No!"</p>
+      <p><em>(The slide confirms this — it literally says "No!" 😄)</em></p>
+    </div>
+
+    <div class="warn">⚠️ <strong>Shortcut:</strong> Convert each 8-bit byte to decimal, then look up in the ASCII table provided. Binary → decimal: add up powers of 2 for each "1" bit (128, 64, 32, 16, 8, 4, 2, 1 from left to right).</div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="section-header" style="background: linear-gradient(90deg, #9c27b0, #4a148c);" id="q9">
+    <span class="emoji">📦</span>
+    <h2>Q9 — Bag of Words & One-Hot Encoding</h2>
+    <span class="points">10 pts</span>
+  </div>
+
+  <div class="card purple">
+    <div class="q-label">Part A — What is Bag of Words (BoW)?</div>
+    <div class="answer-box">
+      <span class="key">✅ Answer:</span> BoW represents a document as a <strong>collection of word counts</strong>, ignoring grammar and word order. Each unique word in the vocabulary gets a position in a vector, and the value = how many times that word appears.
+    </div>
+    <h3>Example:</h3>
+    <p>Vocabulary: [The, cat, in, hat, sat, on, mat]</p>
+    <p>• "The cat in the hat" → <code>[2, 1, 1, 1, 0, 0, 0]</code></p>
+    <p>• "The cat sat on the mat" → <code>[2, 1, 0, 0, 1, 1, 1]</code></p>
+
+    <div class="q-label" style="margin-top:16px;">Part B — One-Hot Encoding of [human, animal, world, computer]</div>
+    <div class="answer-box">
+      <span class="key">✅ Answer:</span> Each word becomes a vector with a single "1" and all other positions "0":
+      <table style="margin-top:10px;">
+        <tr><th>Word</th><th>human</th><th>animal</th><th>world</th><th>computer</th></tr>
+        <tr><td>human</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>animal</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+        <tr><td>world</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td>computer</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: RELATIONS -->
+<div class="section">
+  <div class="section-header yellow" id="q10">
+    <span class="emoji">🔗</span>
+    <h2>Q10 — Set Relations</h2>
+    <span class="points">10 pts</span>
+  </div>
+
+  <div class="card yellow">
+    <p><strong>Sets:</strong> A = Americans, M = Mathematicians, P = Philosophers, Knows = relation where (x,y) means x knows y</p>
+
+    <div class="q-label">Part A — "Find people who know an American mathematician"</div>
+    <div class="answer-box yellow">
+      <span class="key orange">✅ Answer:</span><br>
+      We need people who Know someone in A ∩ M<br>
+      <code style="background:#fffde7; padding:4px 8px; border-radius:4px; font-size:1.1em;">π₁(Knows ⋈ (A ∩ M))</code>
+      <p style="margin-top:8px;"><em>Plain English: Find all x where there exists a y such that (x Knows y) AND y is in A AND y is in M</em></p>
+    </div>
+
+    <div class="q-label" style="margin-top:16px;">Part B — "Find philosophers who ONLY know mathematicians"</div>
+    <div class="answer-box yellow">
+      <span class="key orange">✅ Answer:</span><br>
+      Philosophers in P where ALL people they know are in M<br>
+      <code style="background:#fffde7; padding:4px 8px; border-radius:4px; font-size:1.1em;">P − π₁(Knows ⋈ M')</code>
+      <p style="margin-top:8px;"><em>Plain English: Start with all philosophers, remove any who know at least one non-mathematician</em></p>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="section-header yellow" id="q11">
+    <span class="emoji">📐</span>
+    <h2>Q11 — Set Algebra Simplification</h2>
+    <span class="points">10 pts</span>
+  </div>
+
+  <div class="card yellow">
+    <p>Simplify: <strong>((A → B) ∩ A) → B</strong></p>
+    <div class="info">💡 <strong>Key rule to remember:</strong> A → B = A' ∪ B (Implication Law)</div>
+
+    <div class="answer-box yellow">
+      <span class="key orange">✅ Step-by-step proof:</span>
+      <ol style="padding-left:20px; margin-top:8px;">
+        <li>Rewrite A → B using implication law: <strong>(A' ∪ B) ∩ A</strong></li>
+        <li>Distribute ∩ over ∪: <strong>(A' ∩ A) ∪ (B ∩ A)</strong></li>
+        <li>A' ∩ A = ∅ (Complement law): <strong>∅ ∪ (B ∩ A)</strong></li>
+        <li>∅ ∪ X = X (Identity law): <strong>A ∩ B</strong></li>
+        <li>Now the full expression is: <strong>(A ∩ B) → B</strong></li>
+        <li>Rewrite using implication: <strong>(A ∩ B)' ∪ B</strong></li>
+        <li>De Morgan: <strong>(A' ∪ B') ∪ B</strong></li>
+        <li>Associativity + Complement: B' ∪ B = U → <strong>A' ∪ U = U</strong></li>
+        <li><strong>Result = U (always true / tautology)</strong></li>
+      </ol>
+    </div>
+    <div class="warn">⚠️ The slides confirm this simplifies using: Complement law (X∪X'=U), Associative law, Implication law, and De Morgan's Law.</div>
+
+    <h3>Essential Laws Cheat Sheet:</h3>
+    <table>
+      <tr><th>Law</th><th>Formula</th></tr>
+      <tr><td>Implication</td><td>A → B = A' ∪ B</td></tr>
+      <tr><td>De Morgan (∩)</td><td>(A ∩ B)' = A' ∪ B'</td></tr>
+      <tr><td>De Morgan (∪)</td><td>(A ∪ B)' = A' ∩ B'</td></tr>
+      <tr><td>Complement</td><td>A ∩ A' = ∅ &nbsp;&nbsp;|&nbsp;&nbsp; A ∪ A' = U</td></tr>
+      <tr><td>Identity</td><td>A ∪ ∅ = A &nbsp;&nbsp;|&nbsp;&nbsp; A ∩ U = A</td></tr>
+      <tr><td>Absorption</td><td>A ∩ (A ∪ B) = A</td></tr>
+      <tr><td>Abjunction</td><td>(A → B)' = A ∩ B'</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 5: IMAGE REPRESENTATION -->
+<div class="section">
+  <div class="section-header" style="background: linear-gradient(90deg, #e91e8c, #880e4f);" id="q12">
+    <span class="emoji">🌊</span>
+    <h2>Q12 — Complex Numbers & Fourier Transform</h2>
+    <span class="points">15 pts</span>
+  </div>
+
+  <div class="card pink">
+    <div class="q-label">Part A — Complex number (2, 3i): Magnitude & Angle</div>
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>📏 Magnitude</h4>
+        <p>Use Pythagorean theorem:<br>
+        |z| = √(real² + imaginary²)<br>
+        |z| = √(2² + 3²)<br>
+        |z| = √(4 + 9) = √13</p>
+        <div class="answer-box"><strong>≈ 3.606</strong></div>
+      </div>
+      <div class="mini-card orange">
+        <h4>📐 Angle (θ)</h4>
+        <p>Use arctangent:<br>
+        θ = arctan(imaginary / real)<br>
+        θ = arctan(3/2)</p>
+        <div class="answer-box orange"><strong>≈ 56.31°</strong></div>
+      </div>
+    </div>
+
+    <div class="q-label" style="margin-top:16px;">Part B — Steps to implement the Fourier Transform</div>
+    <div class="answer-box">
+      <span class="key">✅ Answer (from slides):</span>
+      <ol style="padding-left:20px; margin-top:8px;">
+        <li><strong>Loop over frequencies</strong> (for each frequency you want to analyze):</li>
+        <li>Create a <strong>complex sine wave</strong> with the same number of time points as the signal, at the current frequency</li>
+        <li>Compute the <strong>dot product</strong> between the complex sine wave and the signal</li>
+        <li>End loop</li>
+        <li>The result: each dot product = a <strong>Fourier coefficient</strong> for that frequency</li>
+        <li>The <strong>magnitude</strong> of coefficients = amplitude spectrum</li>
+        <li>The <strong>angle</strong> of coefficients = phase spectrum</li>
+      </ol>
+    </div>
+    <div class="info">🎵 <strong>Big idea:</strong> The Fourier Transform breaks any signal into the sum of sine waves. It answers: "What frequencies make up this signal?" This is how music equalizers, image compression, and signal processing work.</div>
+  </div>
+</div>
+
+<!-- FINAL TIPS -->
+<div class="section">
+  <div class="card" style="border-left-color: #ffc107; background: linear-gradient(135deg, #fffde7, #fff8e1);">
+    <h2 style="color: #e65100; margin-bottom:16px;">⭐ Last-Minute Power Tips</h2>
+    <div class="two-col">
+      <div>
+        <p>🔁 <strong>Fibonacci:</strong> Iterative = O(n), Recursive = O(2ⁿ)</p>
+        <p>🔗 <strong>List type:</strong> Circular Doubly Linked List</p>
+        <p>🌲 <strong>Heap:</strong> Min = smallest at root, Max = largest at root</p>
+        <p>🗂️ <strong>Collision fix:</strong> Chaining = linked lists, Probing = find next empty slot</p>
+        <p>📝 <strong>ASCII decode:</strong> "No!" (binary → decimal → letter)</p>
+      </div>
+      <div>
+        <p>🔄 <strong>1's Complement:</strong> Just flip all bits!</p>
+        <p>🔄 <strong>IEEE 754:</strong> Sign | Exponent+127 | Mantissa (23 bits)</p>
+        <p>⚡ <strong>Logic gates:</strong> Q = AB + BC</p>
+        <p>📦 <strong>One-hot:</strong> One "1" per row, rest are "0"s</p>
+        <p>🌊 <strong>Fourier:</strong> Loop → complex sine wave → dot product</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:20px; padding:16px; background:#6c63ff; border-radius:10px; color:white;">
+      <strong>You've got this! 🚀 Good luck on the exam!</strong>
+    </div>
+  </div>
+</div>
+
+<footer>D321 Data Representation — Spring 2026 • Study Guide based on Mock Exam & Review Slides</footer>
+
+</body>
+</html>

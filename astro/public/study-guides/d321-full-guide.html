@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D321 — Start From Zero Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0e17;
+  --surface: #1a1927;
+  --card: #201e2e;
+  --border: #2e2c42;
+  --text: #e8e6f0;
+  --muted: #8b89a0;
+  --accent: #ff6b6b;
+  --accent2: #ffd166;
+  --accent3: #06d6a0;
+  --accent4: #4ecdc4;
+  --accent5: #c77dff;
+  --accent6: #f4a261;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* HERO */
+.hero {
+  padding: 70px 24px 50px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, #2a1f4e 0%, #0f0e17 70%);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72em;
+  letter-spacing: 3px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  border: 1px solid var(--accent);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2em, 6vw, 3.8em);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: #fff;
+}
+.hero h1 span { color: var(--accent2); }
+.hero p {
+  color: var(--muted);
+  font-size: 1.05em;
+  max-width: 520px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* NAV */
+.nav-wrap {
+  max-width: 980px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+.nav-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.nav-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.nav-item:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.nav-item .pts {
+  margin-left: auto;
+  color: var(--accent2);
+  font-size: 0.9em;
+}
+
+/* SECTION DIVIDER */
+.chapter {
+  max-width: 980px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+.chapter-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 28px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  font-family: 'Syne', sans-serif;
+}
+.chapter-header h2 { font-size: 1.4em; font-weight: 800; }
+.chapter-header .ch-num {
+  font-size: 0.75em;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.ch-red { background: linear-gradient(135deg, #3d1515, #2a1010); border: 1px solid #5c2020; }
+.ch-yellow { background: linear-gradient(135deg, #3d3015, #2a220a); border: 1px solid #5c4820; }
+.ch-green { background: linear-gradient(135deg, #0f3020, #0a2015); border: 1px solid #1a5035; }
+.ch-teal { background: linear-gradient(135deg, #0f2d35, #0a1f25); border: 1px solid #1a4d5c; }
+.ch-purple { background: linear-gradient(135deg, #25173d, #180e2a); border: 1px solid #3d2860; }
+.ch-orange { background: linear-gradient(135deg, #3d2015, #2a140a); border: 1px solid #6b3520; }
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+}
+.card-inner {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin: 14px 0;
+  border-left: 3px solid var(--accent);
+}
+.card-inner.yellow { border-left-color: var(--accent2); }
+.card-inner.green { border-left-color: var(--accent3); }
+.card-inner.teal { border-left-color: var(--accent4); }
+.card-inner.purple { border-left-color: var(--accent5); }
+.card-inner.orange { border-left-color: var(--accent6); }
+
+/* LABELS */
+.label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+.label.red { color: var(--accent); }
+.label.yellow { color: var(--accent2); }
+.label.green { color: var(--accent3); }
+.label.teal { color: var(--accent4); }
+.label.purple { color: var(--accent5); }
+.label.orange { color: var(--accent6); }
+
+h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #fff;
+  margin: 20px 0 8px;
+}
+h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--accent2);
+  margin-bottom: 6px;
+}
+p { margin-bottom: 10px; color: var(--text); font-size: 0.97em; }
+em { color: var(--muted); }
+strong { color: #fff; font-style: normal; }
+
+/* ANSWER BOX */
+.answer {
+  background: #0d2e1f;
+  border: 1px solid var(--accent3);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  font-size: 0.95em;
+}
+.answer .answer-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7em;
+  color: var(--accent3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.answer-label::before { content: '✓'; font-size: 1.1em; }
+
+/* CODE */
+code {
+  font-family: 'DM Mono', monospace;
+  background: #1a1927;
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: var(--accent4);
+}
+.codeblock {
+  background: #090911;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85em;
+  color: #a8ff78;
+  white-space: pre-wrap;
+  margin: 12px 0;
+  line-height: 1.7;
+}
+.codeblock .c { color: #5c6bc0; font-style: italic; }
+.codeblock .k { color: #ff7eb3; }
+.codeblock .n { color: var(--accent2); }
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 0.88em;
+}
+th {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  text-align: left;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* GRID */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 12px 0; }
+@media(max-width:640px) { .two-col,.three-col { grid-template-columns:1fr; } .nav-grid { grid-template-columns: 1fr 1fr; } }
+
+/* CALLOUT */
+.callout {
+  display: flex;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin: 12px 0;
+  font-size: 0.93em;
+}
+.callout.warn { background: #2a1f06; border: 1px solid #5c4520; }
+.callout.info { background: #061628; border: 1px solid #1a3a5c; }
+.callout.tip { background: #0f2820; border: 1px solid #1a5030; }
+.callout-icon { font-size: 1.4em; flex-shrink: 0; }
+
+/* ANALOGY BOX */
+.analogy {
+  background: #1e1630;
+  border: 1px dashed #5c3d8c;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.93em;
+}
+.analogy strong { color: var(--accent5); font-style: normal; }
+
+/* BIG FORMULA */
+.formula {
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 1.4em;
+  padding: 20px;
+  background: #090911;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin: 14px 0;
+  color: var(--accent2);
+}
+
+/* STEP LIST */
+.steps { counter-reset: step; list-style: none; padding: 0; }
+.steps li {
+  counter-increment: step;
+  display: flex;
+  gap: 14px;
+  margin-bottom: 12px;
+  font-size: 0.94em;
+}
+.steps li::before {
+  content: counter(step);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8em;
+  background: var(--accent);
+  color: #000;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+/* POINTS BADGE */
+.pts-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72em;
+  background: var(--accent2);
+  color: #000;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* QUESTION HEADER */
+.q-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.q-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6em;
+  font-weight: 800;
+  color: #fff;
+  opacity: 0.12;
+}
+.q-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.05em;
+  color: #fff;
+}
+
+/* MINI TAG */
+.tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7em;
+  padding: 2px 10px;
+  border-radius: 4px;
+  margin: 2px;
+  font-weight: 500;
+}
+.tag.red { background: #3d1515; color: var(--accent); border: 1px solid #5c2020; }
+.tag.green { background: #0f3020; color: var(--accent3); border: 1px solid #1a5035; }
+.tag.yellow { background: #3d3015; color: var(--accent2); border: 1px solid #5c4820; }
+
+/* BINARY VIZ */
+.bit-grid {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.bit {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 1.1em;
+  font-weight: 700;
+  border-radius: 6px;
+}
+.bit.one { background: #1a3d28; color: var(--accent3); border: 1px solid #2a6040; }
+.bit.zero { background: #1a1927; color: var(--muted); border: 1px solid var(--border); }
+.bit.dot { background: transparent; color: var(--accent2); border: none; width: 16px; }
+
+/* TREE VIZ */
+.tree-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85em;
+  font-weight: 700;
+}
+.node-max { background: #3d1515; color: var(--accent); border: 2px solid #6b2020; }
+.node-min { background: #0f3020; color: var(--accent3); border: 2px solid #1a5035; }
+.node-normal { background: var(--surface); color: var(--text); border: 2px solid var(--border); }
+
+.tree-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+/* HASH VIZ */
+.hash-table {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 12px 0;
+}
+.hash-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.hash-idx {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75em;
+  color: var(--muted);
+  width: 20px;
+  text-align: right;
+}
+.hash-cell {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8em;
+}
+.hash-cell.filled { background: #0f2820; border-color: var(--accent3); color: var(--accent3); }
+.hash-cell.collision { background: #2a1f06; border-color: var(--accent2); color: var(--accent2); }
+
+/* LOGIC GATE */
+.gate-eq {
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 2em;
+  color: #fff;
+  padding: 20px;
+  background: #090911;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin: 14px 0;
+  letter-spacing: 3px;
+}
+
+/* ASCII */
+.ascii-decode {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+.ascii-char {
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 20px;
+}
+.ascii-binary { font-family: 'DM Mono', monospace; font-size: 0.78em; color: var(--muted); margin-bottom: 6px; }
+.ascii-decimal { font-family: 'DM Mono', monospace; font-size: 1em; color: var(--accent4); margin-bottom: 6px; }
+.ascii-result { font-family: 'Syne', sans-serif; font-size: 2em; font-weight: 800; color: var(--accent2); }
+
+/* ONE HOT */
+.ohe-table td { text-align: center; }
+.ohe-one { background: #0f3020; color: var(--accent3); font-family: 'DM Mono', monospace; font-weight: 700; }
+.ohe-zero { color: var(--muted); font-family: 'DM Mono', monospace; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78em;
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+}
+
+/* SCROLL ANIMATION */
+.card { opacity: 0; transform: translateY(20px); animation: fadeUp 0.5s ease forwards; }
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">D321 Data Representation · Spring 2026</div>
+  <h1>You missed everything.<br><span>Let's fix that.</span></h1>
+  <p>Every concept, from scratch, explained like a friend — not a textbook. ADHD-friendly, exam-ready.</p>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <p class="nav-label">Jump to a question</p>
+  <div class="nav-grid">
+    <a class="nav-item" href="#q1">Q1 · Fibonacci <span class="pts">5pt</span></a>
+    <a class="nav-item" href="#q2">Q2 · Linked Lists <span class="pts">4pt</span></a>
+    <a class="nav-item" href="#q3">Q3 · Heap Trees <span class="pts">8pt</span></a>
+    <a class="nav-item" href="#q4">Q4 · Hash Tables <span class="pts">8pt</span></a>
+    <a class="nav-item" href="#q5">Q5 · Binary Math <span class="pts">10pt</span></a>
+    <a class="nav-item" href="#q6">Q6 · Conversions <span class="pts">10pt</span></a>
+    <a class="nav-item" href="#q7">Q7 · Logic Gates <span class="pts">5pt</span></a>
+    <a class="nav-item" href="#q8">Q8 · ASCII <span class="pts">5pt</span></a>
+    <a class="nav-item" href="#q9">Q9 · BoW & One-Hot <span class="pts">10pt</span></a>
+    <a class="nav-item" href="#q10">Q10 · Set Relations <span class="pts">10pt</span></a>
+    <a class="nav-item" href="#q11">Q11 · Set Algebra <span class="pts">10pt</span></a>
+    <a class="nav-item" href="#q12">Q12 · Fourier <span class="pts">15pt</span></a>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 1: DATA STRUCTURES -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-header ch-red" id="q1">
+    <div>
+      <div class="ch-num">Chapter 1 · Data Structures & Algorithms</div>
+      <h2>📊 Algorithms, Recursion & Linked Lists</h2>
+    </div>
+  </div>
+
+  <!-- BACKGROUND: WHAT IS AN ALGORITHM -->
+  <div class="card">
+    <span class="label red">Background Knowledge</span>
+    <div class="q-header"><div class="q-title">What is an algorithm, and what is time complexity?</div></div>
+    <p>An <strong>algorithm</strong> is just a set of instructions for solving a problem. Like a recipe — it takes inputs and produces an output.</p>
+    <p><strong>Time complexity</strong> is how we measure how much <em>longer</em> an algorithm takes as the input gets bigger. We use <strong>Big O notation</strong> for this.</p>
+
+    <div class="two-col">
+      <div class="card-inner green">
+        <h4>O(1) — Constant</h4>
+        <p>Always takes the same time, no matter the input. Fast. Like looking up your name in a phonebook if you know the exact page.</p>
+      </div>
+      <div class="card-inner yellow">
+        <h4>O(n) — Linear</h4>
+        <p>Time grows proportionally to input size. Scan through a list of 100 items → 100 steps. List of 1,000 → 1,000 steps.</p>
+      </div>
+      <div class="card-inner">
+        <h4>O(n²) — Quadratic</h4>
+        <p>Time grows by the square. A list of 10 → 100 steps. A list of 100 → 10,000 steps. Gets slow fast.</p>
+      </div>
+      <div class="card-inner red" style="border-left-color: var(--accent);">
+        <h4>O(2ⁿ) — Exponential</h4>
+        <p>Doubles with every new input. n=10 → 1,024 steps. n=50 → over 1 <em>quadrillion</em> steps. Basically unusable at large n.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="card">
+    <span class="label red">Question 1 · 5 points</span>
+    <div class="q-header">
+      <div class="q-num">01</div>
+      <div class="q-title">Recursive vs Iterative Fibonacci — which is better, and why?</div>
+      <div class="pts-badge">5 pts</div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">📖</span>
+      <div><strong>First: what IS Fibonacci?</strong> It's a sequence where each number is the sum of the two before it: 0, 1, 1, 2, 3, 5, 8, 13, 21… The rule is F(n) = F(n-1) + F(n-2), starting with F(0)=0, F(1)=1.</div>
+    </div>
+
+    <h3>Method 1: Recursion</h3>
+    <p>The function calls <em>itself</em> to solve smaller versions of the problem.</p>
+    <div class="codeblock"><span class="k">def</span> <span class="n">fib</span>(n):
+    <span class="k">if</span> n &lt;= 1:
+        <span class="k">return</span> n            <span class="c"># base case — stop here</span>
+    <span class="k">return</span> fib(n-1) + fib(n-2)  <span class="c"># calls itself TWICE!</span></div>
+    <p>The problem? To calculate <code>fib(5)</code>, it calls <code>fib(4)</code> AND <code>fib(3)</code>. Then <code>fib(4)</code> calls <code>fib(3)</code> and <code>fib(2)</code>... it recalculates the same values <em>over and over</em>. The tree of calls explodes.</p>
+    <span class="tag red">Time: O(2ⁿ) — exponential 💀</span>
+
+    <h3>Method 2: Iteration</h3>
+    <p>Uses a loop. Calculates each number once and moves on. No repeated work.</p>
+    <div class="codeblock"><span class="k">def</span> <span class="n">fib_iter</span>(n):
+    a, b = 0, 1
+    <span class="k">for</span> i <span class="k">in</span> range(n):
+        a, b = b, a + b   <span class="c"># just update two variables</span>
+    <span class="k">return</span> a</div>
+    <span class="tag green">Time: O(n) — linear ✓</span>
+
+    <div class="answer">
+      <div class="answer-label">Exam Answer</div>
+      <p>The <strong>iterative approach is far more efficient</strong>. Iterative runs in <strong>O(n)</strong> time — it visits each step exactly once. Recursive runs in <strong>O(2ⁿ)</strong> — it branches into two calls at every step, causing massive repeated computation. As n grows, recursive becomes exponentially slower and quickly becomes impractical.</p>
+    </div>
+  </div>
+
+  <!-- BACKGROUND: LINKED LISTS -->
+  <div class="card">
+    <span class="label red">Background Knowledge</span>
+    <div class="q-title" style="margin-bottom:14px;">What even IS a linked list vs a regular list?</div>
+
+    <div class="two-col">
+      <div class="card-inner green">
+        <h4>Regular List (Array)</h4>
+        <p>Elements sit in a <strong>continuous block of memory</strong>, side by side. Fast to access by index (just jump to position). But inserting/deleting in the middle requires shifting everything.</p>
+        <div class="analogy"><strong>Analogy:</strong> Reserved seats in a row at a theater — you know exactly where seat 7 is.</div>
+      </div>
+      <div class="card-inner">
+        <h4>Linked List</h4>
+        <p>Elements are <strong>scattered anywhere in memory</strong>. Each element (node) stores its data AND a pointer (address) to the next node. Easy to insert/delete anywhere — just update pointers.</p>
+        <div class="analogy"><strong>Analogy:</strong> A scavenger hunt — each clue tells you where the next one is hidden.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="card">
+    <span class="label red">Question 2 · 4 points</span>
+    <div class="q-header">
+      <div class="q-num">02</div>
+      <div class="q-title">What type of list is the diagram, and how is it stored in memory?</div>
+      <div class="pts-badge">4 pts</div>
+    </div>
+
+    <p>The diagram shows nodes connected with arrows pointing <strong>in both directions</strong>, AND the last node's arrow wraps back to the first. That's the key pattern.</p>
+
+    <h3>The 4 Types of Linked Lists</h3>
+    <table>
+      <tr><th>Type</th><th>Arrows</th><th>Last connects to first?</th><th>Real-world example</th></tr>
+      <tr><td><strong>Singly Linked</strong></td><td>→ one way</td><td>No</td><td>Basic list</td></tr>
+      <tr><td><strong>Circular Singly</strong></td><td>→ one way</td><td>✓ Yes (loops)</td><td>Chess game (whose turn is it?)</td></tr>
+      <tr><td><strong>Doubly Linked</strong></td><td>↔ both ways</td><td>No</td><td>Music player (fwd & back)</td></tr>
+      <tr><td style="color: var(--accent2);"><strong>Circular Doubly ← THIS ONE</strong></td><td>↔ both ways</td><td>✓ Yes (loops)</td><td>Mac ⌘+Tab app switcher</td></tr>
+    </table>
+
+    <div class="answer">
+      <div class="answer-label">Part A Answer</div>
+      <p><strong>Circular Doubly Linked List.</strong> Each node has a NEXT pointer (forward) and a PREVIOUS pointer (backward), and the last node's NEXT pointer points back to the head (first) node.</p>
+    </div>
+
+    <h3>Part B — Memory Allocation</h3>
+    <p>Unlike arrays, a linked list doesn't need contiguous memory. Each <strong>node</strong> is an object stored at any available memory address, containing:</p>
+    <div class="card-inner teal">
+      <p>Each node holds: <code>[DATA | PREV_POINTER | NEXT_POINTER]</code></p>
+      <p>The NEXT_POINTER is the <strong>memory address</strong> of the next node. The PREV_POINTER is the address of the previous one. They can be anywhere in RAM — the pointers link them together logically.</p>
+    </div>
+    <div class="answer">
+      <div class="answer-label">Part B Answer</div>
+      <p>Nodes are allocated in <strong>non-contiguous (scattered) memory locations</strong>. Each node stores its value plus two pointers — one to the next node's address, one to the previous node's address. In a circular doubly linked list, the tail's NEXT pointer stores the head's address, and the head's PREV pointer stores the tail's address, forming a complete loop.</p>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="card">
+    <span class="label red">Question 3 · 8 points</span>
+    <div class="q-header">
+      <div class="q-num">03</div>
+      <div class="q-title">Min Heap, Max Heap — what are they and how do you build one?</div>
+      <div class="pts-badge">8 pts</div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">🌲</span>
+      <div><strong>First: what's a binary tree?</strong> A tree is a structure where each element (node) has at most 2 children (left and right). A <strong>complete</strong> binary tree fills every level left-to-right before starting the next level. A heap is always a complete binary tree.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="card-inner green">
+        <h4>🔽 Min Heap</h4>
+        <p>Every parent is <strong>smaller than or equal to</strong> its children. The <strong>root = minimum value</strong> in the whole tree.</p>
+        <div class="tree-row">
+          <div class="tree-node node-min">1</div>
+        </div>
+        <div class="tree-row">
+          <div class="tree-node node-min">4</div>
+          <div class="tree-node node-min">8</div>
+        </div>
+        <div class="tree-row">
+          <div class="tree-node node-normal">12</div>
+          <div class="tree-node node-normal">15</div>
+          <div class="tree-node node-normal">22</div>
+          <div class="tree-node node-normal">48</div>
+        </div>
+      </div>
+      <div class="card-inner" style="border-left-color: var(--accent);">
+        <h4>🔼 Max Heap</h4>
+        <p>Every parent is <strong>larger than or equal to</strong> its children. The <strong>root = maximum value</strong> in the whole tree.</p>
+        <div class="tree-row">
+          <div class="tree-node node-max">48</div>
+        </div>
+        <div class="tree-row">
+          <div class="tree-node node-max">15</div>
+          <div class="tree-node node-max">22</div>
+        </div>
+        <div class="tree-row">
+          <div class="tree-node node-normal">12</div>
+          <div class="tree-node node-normal">4</div>
+          <div class="tree-node node-normal">8</div>
+          <div class="tree-node node-normal">1</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Building a heap from [1, 4, 8, 48, 12, 15, 22]</h3>
+    <p>The process is called <strong>"heapify"</strong>. Here's how to build a <strong>Max Heap</strong>:</p>
+    <ol class="steps">
+      <li>Place all elements into the tree in order, left-to-right, filling level by level: <code>48</code> is at position n/2 (the last non-leaf node). Start there.</li>
+      <li><strong>"Bubble down"</strong> each element starting from the middle and going left to the root. Compare a parent to its children — if a child is bigger, swap them.</li>
+      <li>After bubbling down 48 (already largest, no swap needed), check 8 — its children are 15 and 22. 22 > 8 so swap. Now 22 is the parent.</li>
+      <li>Check 4 — its children are 48 and 12. 48 > 4, so swap. Now 48 is the parent. Keep going until no more swaps needed.</li>
+      <li>Finally, the root will hold the largest value (48), satisfying the Max Heap property.</li>
+    </ol>
+    <div class="answer">
+      <div class="answer-label">Exam Answer — Part A</div>
+      <p><strong>Min Heap:</strong> A complete binary tree where every parent ≤ its children. Root holds the minimum. <strong>Max Heap:</strong> A complete binary tree where every parent ≥ its children. Root holds the maximum.</p>
+    </div>
+    <div class="answer">
+      <div class="answer-label">Exam Answer — Part B (show your steps!)</div>
+      <p>Insert [1, 4, 8, 48, 12, 15, 22] into a complete binary tree. For a Max Heap: start from the middle element and "bubble down" — compare each parent to its children and swap if a child is larger. Repeat until the entire tree satisfies the Max Heap property (48 at root). For a Min Heap, swap when a child is smaller, resulting in 1 at root.</p>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="card">
+    <span class="label red">Question 4 · 8 points</span>
+    <div class="q-header">
+      <div class="q-num">04</div>
+      <div class="q-title">Hash table collisions — what are they and how do you resolve them?</div>
+      <div class="pts-badge">8 pts</div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">🗂️</span>
+      <div><strong>What's a hash table?</strong> It's a super-fast lookup structure. You run your data through a <strong>hash function</strong> (like "divide by 5 and take the remainder") to get an index. Then you store the data at that index. Looking things up is O(1) — instant!</div>
+    </div>
+
+    <div class="analogy"><strong>Analogy:</strong> Imagine 10 filing cabinets numbered 0–9. To file a document, you take the last digit of the document ID — that's its cabinet number. Fast to find! But what if two documents end in the same digit? That's a <strong>collision</strong>.</div>
+
+    <div class="answer">
+      <div class="answer-label">Part A — What is a collision?</div>
+      <p>A <strong>hash collision</strong> occurs when two different pieces of data produce the <strong>same hash value</strong>, meaning they're mapped to the same slot in the hash table. Example: if h(PHL)=4 and h(HKG)=4, both try to go in slot 4.</p>
+    </div>
+
+    <h3>Resolution Strategy 1: Direct Chaining (Linked Lists)</h3>
+    <p>Instead of one value per slot, each slot holds a <strong>linked list</strong>. Colliding values just get added to the chain.</p>
+    <div class="hash-table">
+      <div class="hash-row"><span class="hash-idx">0</span><div class="hash-cell filled">ORY</div></div>
+      <div class="hash-row"><span class="hash-idx">1</span><div class="hash-cell filled">LAX → DCA</div></div>
+      <div class="hash-row"><span class="hash-idx">2</span><div class="hash-cell">empty</div></div>
+      <div class="hash-row"><span class="hash-idx">3</span><div class="hash-cell">empty</div></div>
+      <div class="hash-row"><span class="hash-idx">4</span><div class="hash-cell filled">PHL → GLA → HKG (chained!)</div></div>
+    </div>
+
+    <h3>Resolution Strategy 2: Linear Probing (Open Addressing)</h3>
+    <p>If the target slot is occupied, <strong>search for the next available slot</strong> by decrementing the index by 1. Wrap around to the end if you hit 0.</p>
+    <div class="card-inner yellow">
+      <p>Example: PHL hashes to slot 4. HKG also hashes to slot 4. Slot 4 is full, so try slot 3 — it's empty! Put HKG in slot 3 instead.</p>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div><strong>Problem with linear probing:</strong> "Primary clustering" — items pile up in long contiguous blocks, making future insertions slower and slower. The fix: <strong>Double Hashing</strong> — use a second hash function to calculate how many slots to jump (not just 1). This spreads things out more evenly.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 2: BINARY -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-header ch-teal" id="q5">
+    <div>
+      <div class="ch-num">Chapter 2 · Binary, Octal & Hexadecimal</div>
+      <h2>🔢 Number Systems & Binary Arithmetic</h2>
+    </div>
+  </div>
+
+  <!-- BACKGROUND -->
+  <div class="card">
+    <span class="label teal">Background Knowledge</span>
+    <div class="q-title" style="margin-bottom:14px;">Why does binary exist? What IS it?</div>
+    <p>Computers are made of transistors — tiny switches that are either <strong>ON (1) or OFF (0)</strong>. That's it. So everything a computer does is built from combinations of 1s and 0s. This is <strong>binary</strong> (base 2).</p>
+    <p>We use <strong>decimal</strong> (base 10) in everyday life — ten digits (0-9). Binary only has 2 digits (0 and 1). <strong>Octal</strong> uses base 8 (digits 0–7). <strong>Hexadecimal</strong> uses base 16 (digits 0–9 then A–F).</p>
+    <h3>How to read a binary number</h3>
+    <p>Each position represents a power of 2, from right to left: 1, 2, 4, 8, 16, 32...</p>
+    <div class="bit-grid">
+      <div class="bit one">1</div><div class="bit one">1</div><div class="bit zero">0</div><div class="bit one">1</div><div class="bit one">1</div>
+      <div class="bit dot">.</div>
+      <div class="bit one">1</div><div class="bit zero">0</div><div class="bit one">1</div>
+    </div>
+    <p style="font-family: 'DM Mono', monospace; font-size:0.85em; color: var(--muted);">16 + 8 + 0 + 2 + 1 = 27 &nbsp;|&nbsp; .5 + 0 + .125 = .625 &nbsp;→&nbsp; 27.625 in decimal</p>
+  </div>
+
+  <!-- Q5 -->
+  <div class="card">
+    <span class="label teal">Question 5 · 10 points</span>
+    <div class="q-header">
+      <div class="q-num">05</div>
+      <div class="q-title">Binary multiplication and addition of B = 111.0011 and C = 1.00101</div>
+      <div class="pts-badge">10 pts</div>
+    </div>
+
+    <h3>Part A — Binary Multiplication (B × C)</h3>
+    <div class="callout info">
+      <span class="callout-icon">💡</span>
+      <div>The method is called <strong>Partial Sum (shift and add)</strong>. Just like long multiplication in decimal, but simpler because every bit is either 0 or 1.</div>
+    </div>
+    <ol class="steps">
+      <li>Ignore decimal points temporarily. Treat both as whole numbers.</li>
+      <li>For each bit in C (right to left): if the bit is <strong>1</strong>, write out B shifted left by that position. If the bit is <strong>0</strong>, write a row of zeros.</li>
+      <li>Add all the partial products together in binary.</li>
+      <li>Count total decimal places in B (4) plus decimal places in C (5) = <strong>9 decimal places</strong> in the final answer. Place the decimal point 9 positions from the right.</li>
+    </ol>
+
+    <h3>Part B — Binary Addition (B + C)</h3>
+    <p>Align the decimal points. Add column by column from right to left.</p>
+    <table>
+      <tr><th>Inputs</th><th>Sum bit</th><th>Carry</th></tr>
+      <tr><td>0 + 0</td><td>0</td><td>0</td></tr>
+      <tr><td>0 + 1 &nbsp;or&nbsp; 1 + 0</td><td>1</td><td>0</td></tr>
+      <tr><td>1 + 1</td><td>0</td><td>carry 1 to left</td></tr>
+      <tr><td>1 + 1 + 1 (with carry)</td><td>1</td><td>carry 1 to left</td></tr>
+    </table>
+    <div class="answer">
+      <div class="answer-label">Exam Answer (from slides)</div>
+      <p>Addition result: <strong>00100.010</strong></p>
+      <p><em>Show your work: write B and C aligned at the decimal, add bit by bit right-to-left, carrying when 1+1.</em></p>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="card">
+    <span class="label teal">Question 6 · 10 points</span>
+    <div class="q-header">
+      <div class="q-num">06</div>
+      <div class="q-title">Convert 11011.101 to Hex, Octal, IEEE 754, and 1's Complement</div>
+      <div class="pts-badge">10 pts</div>
+    </div>
+
+    <p>Starting number: </p>
+    <div class="bit-grid">
+      <div class="bit one">1</div><div class="bit one">1</div><div class="bit zero">0</div><div class="bit one">1</div><div class="bit one">1</div>
+      <div class="bit dot">.</div>
+      <div class="bit one">1</div><div class="bit zero">0</div><div class="bit one">1</div>
+    </div>
+
+    <h3>a) → Hexadecimal</h3>
+    <p><strong>Rule:</strong> Group binary digits into sets of <strong>4</strong>, starting from the decimal point going both left and right. Add leading/trailing zeros as needed.</p>
+    <div class="card-inner teal">
+      <p>Integer part: <code>0001 1011</code> → 0001 = 1, 1011 = 11 = B → <strong>1B</strong></p>
+      <p>Fraction part: <code>.1010</code> → 1010 = 10 = A → <strong>.A</strong></p>
+      <p>Hex reference: 0-9 are the same, then 10=A, 11=B, 12=C, 13=D, 14=E, 15=F</p>
+    </div>
+    <div class="answer"><div class="answer-label">Answer</div><strong>1B.A</strong> in hexadecimal</div>
+
+    <h3>b) → Octal</h3>
+    <p><strong>Rule:</strong> Group binary digits into sets of <strong>3</strong>, starting from the decimal point going both ways.</p>
+    <div class="card-inner teal">
+      <p>Integer: <code>011 011</code> → 3, 3 → <strong>33</strong></p>
+      <p>Fraction: <code>.101</code> → 4+0+1 = 5 → <strong>.5</strong></p>
+    </div>
+    <div class="answer"><div class="answer-label">Answer</div><strong>33.5</strong> in octal</div>
+
+    <h3>c) → IEEE 754 (32-bit floating point)</h3>
+    <p>This is how computers store decimal numbers in 32 bits. Three parts: <strong>Sign | Exponent | Mantissa</strong></p>
+    <ol class="steps">
+      <li><strong>Sign bit:</strong> Positive number → <code>0</code></li>
+      <li><strong>Normalize:</strong> Move the decimal so there's exactly one 1 before it: <code>11011.101</code> becomes <code>1.1011101 × 2⁴</code> (moved 4 places left)</li>
+      <li><strong>Exponent:</strong> Take the power (4) and add the bias (127): 4 + 127 = 131. Convert 131 to binary: <code>10000011</code></li>
+      <li><strong>Mantissa:</strong> Take everything after the "1." in the normalized form: <code>1011101</code>. Pad with zeros to get 23 bits: <code>10111010000000000000000</code></li>
+      <li><strong>Combine:</strong> <code>0 | 10000011 | 10111010000000000000000</code></li>
+    </ol>
+    <div class="callout warn"><span class="callout-icon">❓</span><div>Why bias of 127? Because we need to represent both positive and negative exponents. Bias lets us store them as unsigned integers. Exponent 0 is stored as 127, exponent 4 as 131, exponent -1 as 126.</div></div>
+
+    <h3>d) → 1's Complement</h3>
+    <p>The absolute easiest conversion: <strong>flip every single bit</strong>. 0 becomes 1, 1 becomes 0. That's it.</p>
+    <div class="bit-grid">
+      <div class="bit one">1</div><div class="bit one">1</div><div class="bit zero">0</div><div class="bit one">1</div><div class="bit one">1</div>
+      <div class="bit dot">.</div>
+      <div class="bit one">1</div><div class="bit zero">0</div><div class="bit one">1</div>
+    </div>
+    <p style="text-align:center; font-family: 'DM Mono', monospace; color:var(--muted); margin: 6px 0;">flip all bits ↓</p>
+    <div class="bit-grid">
+      <div class="bit zero">0</div><div class="bit zero">0</div><div class="bit one">1</div><div class="bit zero">0</div><div class="bit zero">0</div>
+      <div class="bit dot">.</div>
+      <div class="bit zero">0</div><div class="bit one">1</div><div class="bit zero">0</div>
+    </div>
+    <div class="answer"><div class="answer-label">Answer (confirmed in slides)</div><strong>00100.010</strong></div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 3: CHARACTER ENCODING -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-header ch-purple" id="q7">
+    <div>
+      <div class="ch-num">Chapter 3 · Character Encoding & Text Representation</div>
+      <h2>⚡ Logic Gates, ASCII, Bag of Words</h2>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="card">
+    <span class="label purple">Question 7 · 5 points</span>
+    <div class="q-header">
+      <div class="q-num">07</div>
+      <div class="q-title">Write the expression for the logic gate circuit with inputs A, B, C</div>
+      <div class="pts-badge">5 pts</div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">⚡</span>
+      <div><strong>What are logic gates?</strong> They're the basic building blocks of all computer circuits. Each gate takes binary inputs and produces a binary output based on a logical rule. Every single thing a computer computes is built from combinations of these gates.</div>
+    </div>
+
+    <h3>The gates you need to know</h3>
+    <table>
+      <tr><th>Gate</th><th>Symbol</th><th>Rule in plain English</th><th>Example</th></tr>
+      <tr><td><strong>AND</strong></td><td>·&nbsp; or &nbsp;∧</td><td>Output 1 only if ALL inputs are 1</td><td>1·1=1, 1·0=0</td></tr>
+      <tr><td><strong>OR</strong></td><td>+&nbsp; or &nbsp;∨</td><td>Output 1 if ANY input is 1</td><td>1+0=1, 0+0=0</td></tr>
+      <tr><td><strong>NOT</strong></td><td>A' or Ā</td><td>Flip the input</td><td>NOT 1 = 0</td></tr>
+      <tr><td><strong>NAND</strong></td><td>(A·B)'</td><td>AND, then flip</td><td>1·1 → flip → 0</td></tr>
+      <tr><td><strong>NOR</strong></td><td>(A+B)'</td><td>OR, then flip</td><td>0+0 → flip → 1</td></tr>
+      <tr><td><strong>XOR</strong></td><td>A⊕B</td><td>Output 1 if inputs are DIFFERENT</td><td>1⊕0=1, 1⊕1=0</td></tr>
+    </table>
+
+    <h3>Reading the circuit diagram</h3>
+    <p>In the exam diagram, tracing the paths:</p>
+    <div class="card-inner purple">
+      <p>• <strong>Top path:</strong> A and B feed into an AND gate → produces <code>A·B</code></p>
+      <p>• <strong>Middle path:</strong> B and C feed into an OR gate → that feeds into an AND gate with something → produces <code>B·C</code></p>
+      <p>• <strong>Final gate:</strong> Both results feed into an OR gate → final output Q</p>
+    </div>
+
+    <div class="gate-eq">Q = AB + BC</div>
+    <div class="answer">
+      <div class="answer-label">Exam Answer (confirmed in slides)</div>
+      <p><strong>Q = AB + BC</strong></p>
+      <p><em>Read the circuit from left to right. Each AND gate multiplies its inputs. Each OR gate adds them.</em></p>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="card">
+    <span class="label purple">Question 8 · 5 points</span>
+    <div class="q-header">
+      <div class="q-num">08</div>
+      <div class="q-title">Decode this binary using ASCII: 01001110 01101111 00100001</div>
+      <div class="pts-badge">5 pts</div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">🔤</span>
+      <div><strong>What is ASCII?</strong> Computers only understand numbers. ASCII (American Standard Code for Information Interchange) is a lookup table that maps numbers 0–127 to characters. The letter 'A' is 65, 'a' is 97, '!' is 33, space is 32, and so on. Every byte = one character.</div>
+    </div>
+
+    <h3>How to decode</h3>
+    <p>Convert each 8-bit group to a decimal number, then look up the character in the ASCII table.</p>
+    <p>To convert binary to decimal: write out the bit positions (128, 64, 32, 16, 8, 4, 2, 1) and add up positions that have a 1.</p>
+
+    <div class="ascii-decode">
+      <div class="ascii-char">
+        <div class="ascii-binary">01001110</div>
+        <div class="ascii-decimal">0+64+0+8+4+2+0 = 78</div>
+        <div class="ascii-result">N</div>
+      </div>
+      <div class="ascii-char">
+        <div class="ascii-binary">01101111</div>
+        <div class="ascii-decimal">0+64+32+0+8+4+2+1 = 111</div>
+        <div class="ascii-result">o</div>
+      </div>
+      <div class="ascii-char">
+        <div class="ascii-binary">00100001</div>
+        <div class="ascii-decimal">0+0+32+0+0+0+0+1 = 33</div>
+        <div class="ascii-result">!</div>
+      </div>
+    </div>
+
+    <div class="answer">
+      <div class="answer-label">Exam Answer (literally in the slides 😄)</div>
+      <p>The binary decodes to: <strong>"No!"</strong></p>
+      <p><em>Use the ASCII table provided on the exam. Look up each byte's decimal value to find its character.</em></p>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="card">
+    <span class="label purple">Question 9 · 10 points</span>
+    <div class="q-header">
+      <div class="q-num">09</div>
+      <div class="q-title">Bag of Words method, and one-hot encoding for [human, animal, world, computer]</div>
+      <div class="pts-badge">10 pts</div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">📦</span>
+      <div><strong>The big picture:</strong> Computers can't understand words directly. We have to convert text into <strong>numbers</strong> (vectors) that math can work with. Bag of Words and One-Hot are two ways to do this.</div>
+    </div>
+
+    <h3>Part A — Bag of Words (BoW)</h3>
+    <p>BoW represents a piece of text as a <strong>vector of word counts</strong>. You:</p>
+    <ol class="steps">
+      <li>Build a <strong>vocabulary</strong> — a list of all unique words across all your documents</li>
+      <li>For each document, create a vector with one position per vocabulary word</li>
+      <li>Fill in each position with how many times that word appears in that document</li>
+      <li>Grammar and word order are completely ignored — only <em>frequency</em> matters</li>
+    </ol>
+    <div class="card-inner purple">
+      <p><strong>Example:</strong></p>
+      <p>Vocabulary: [the, cat, in, hat, sat, on, mat]</p>
+      <p>Sentence 1: "The cat in the hat" → <code>[2, 1, 1, 1, 0, 0, 0]</code></p>
+      <p>Sentence 2: "The cat sat on the mat" → <code>[2, 1, 0, 0, 1, 1, 1]</code></p>
+    </div>
+    <div class="analogy"><strong>Analogy:</strong> You dump all the words from a document into a bag, shake it up, and count how many times each word appears. You lose the order — but you capture frequency.</div>
+
+    <h3>Part B — One-Hot Encoding of [human, animal, world, computer]</h3>
+    <p>One-hot encoding represents each item as a vector with exactly one <strong>1</strong> and the rest <strong>0</strong>s. Each item "lights up" only its own position.</p>
+
+    <table>
+      <tr><th>Word</th><th>human</th><th>animal</th><th>world</th><th>computer</th></tr>
+      <tr><td><strong>human</strong></td><td class="ohe-one">1</td><td class="ohe-zero">0</td><td class="ohe-zero">0</td><td class="ohe-zero">0</td></tr>
+      <tr><td><strong>animal</strong></td><td class="ohe-zero">0</td><td class="ohe-one">1</td><td class="ohe-zero">0</td><td class="ohe-zero">0</td></tr>
+      <tr><td><strong>world</strong></td><td class="ohe-zero">0</td><td class="ohe-zero">0</td><td class="ohe-one">1</td><td class="ohe-zero">0</td></tr>
+      <tr><td><strong>computer</strong></td><td class="ohe-zero">0</td><td class="ohe-zero">0</td><td class="ohe-zero">0</td><td class="ohe-one">1</td></tr>
+    </table>
+
+    <div class="answer">
+      <div class="answer-label">Exam Answer</div>
+      <p><strong>BoW:</strong> Represents text as a vector of word frequencies from a fixed vocabulary, ignoring grammar and word order. Example: "The cat sat" with vocab [the, cat, sat, on] → [1, 1, 1, 0].</p>
+      <p style="margin-top:8px;"><strong>One-Hot:</strong> Each word in [human, animal, world, computer] is represented as a 4-element vector with a 1 in its position and 0s everywhere else (see table above).</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 4: RELATIONS -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-header ch-yellow" id="q10">
+    <div>
+      <div class="ch-num">Chapter 4 · Relations & Set Algebra</div>
+      <h2>🔗 Sets, Relations & Logical Simplification</h2>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="label yellow">Background Knowledge</span>
+    <div class="q-title" style="margin-bottom:14px;">What is set theory, and what are relations?</div>
+
+    <div class="two-col">
+      <div class="card-inner yellow">
+        <h4>Sets</h4>
+        <p>A <strong>set</strong> is just a collection of things. A = {all Americans}. M = {all mathematicians}. Operations: <strong>A ∩ B</strong> = intersection (in both), <strong>A ∪ B</strong> = union (in either), <strong>A'</strong> = complement (everything NOT in A).</p>
+      </div>
+      <div class="card-inner orange">
+        <h4>Relations</h4>
+        <p>A <strong>relation</strong> is a set of ordered pairs showing a connection between two sets. "Knows" is a relation: (Alice, Bob) ∈ Knows means Alice knows Bob. Notation: Knows ∋ (x, y) means the pair (x,y) is IN the Knows relation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="card">
+    <span class="label yellow">Question 10 · 10 points</span>
+    <div class="q-header">
+      <div class="q-num">10</div>
+      <div class="q-title">Set relation queries about Americans, Mathematicians, Philosophers</div>
+      <div class="pts-badge">10 pts</div>
+    </div>
+
+    <p><strong>Given:</strong> A = Americans, M = Mathematicians, P = Philosophers, U = all people. <strong>Knows(x,y)</strong> = x knows y.</p>
+
+    <h3>Part A — "Find people who know an American mathematician"</h3>
+    <p>We want: find all x such that there exists a y where (x knows y) AND (y is American) AND (y is a mathematician).</p>
+    <div class="card-inner yellow">
+      <p>American mathematicians = <strong>A ∩ M</strong></p>
+      <p>People who know someone in A ∩ M = the "left side" of the Knows relation, filtered to pairs where the right side is in A ∩ M</p>
+    </div>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><strong>π₁(Knows ⋈ (A ∩ M))</strong></p>
+      <p>Or in plain English: Join the Knows relation with the set of American mathematicians (A ∩ M), then project (select) just the first component (the "knower").</p>
+    </div>
+
+    <h3>Part B — "Find philosophers who ONLY know mathematicians"</h3>
+    <p>This is trickier. We want philosophers where every single person they know is a mathematician.</p>
+    <div class="card-inner yellow">
+      <p>Start with all philosophers: <strong>P</strong></p>
+      <p>Remove any philosopher who knows at least one NON-mathematician</p>
+      <p>Non-mathematicians = M' (complement of M)</p>
+    </div>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><strong>P − π₁(Knows ⋈ M')</strong></p>
+      <p>Take all philosophers, subtract those who have any "knows" relationship with someone who is NOT a mathematician. What remains are philosophers who only know mathematicians.</p>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="card">
+    <span class="label yellow">Question 11 · 10 points</span>
+    <div class="q-header">
+      <div class="q-num">11</div>
+      <div class="q-title">Simplify: ((A → B) ∩ A) → B</div>
+      <div class="pts-badge">10 pts</div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">📐</span>
+      <div><strong>The → symbol means "implies".</strong> "A → B" means "if A, then B". In set algebra, this translates to: <strong>A → B = A' ∪ B</strong> (the implication law). Memorize this — it's the key to Q11.</div>
+    </div>
+
+    <h3>The laws you MUST know for this problem</h3>
+    <table>
+      <tr><th>Law name</th><th>Formula</th><th>Plain English</th></tr>
+      <tr><td>Implication</td><td>A → B = A' ∪ B</td><td>"if A then B" = "not A, or B"</td></tr>
+      <tr><td>Complement (∩)</td><td>A ∩ A' = ∅</td><td>A AND not-A = nothing</td></tr>
+      <tr><td>Complement (∪)</td><td>A ∪ A' = U</td><td>A OR not-A = everything</td></tr>
+      <tr><td>Identity (∪)</td><td>A ∪ ∅ = A</td><td>A or nothing = A</td></tr>
+      <tr><td>Domination (∪)</td><td>A ∪ U = U</td><td>A or everything = everything</td></tr>
+      <tr><td>Distribution</td><td>A∩(B∪C) = (A∩B)∪(A∩C)</td><td>Like algebra distribution</td></tr>
+      <tr><td>De Morgan (∩)</td><td>(A∩B)' = A'∪B'</td><td>NOT(A AND B) = NOT-A OR NOT-B</td></tr>
+    </table>
+
+    <div class="answer">
+      <div class="answer-label">Step-by-step proof</div>
+      <ol class="steps">
+        <li>Start: <strong>((A → B) ∩ A) → B</strong></li>
+        <li>Apply implication law to inner A→B: <strong>((A' ∪ B) ∩ A) → B</strong></li>
+        <li>Distribute ∩ over ∪: <strong>((A' ∩ A) ∪ (B ∩ A)) → B</strong></li>
+        <li>Apply Complement law — A' ∩ A = ∅: <strong>(∅ ∪ (B ∩ A)) → B</strong></li>
+        <li>Apply Identity law — ∅ ∪ X = X: <strong>(A ∩ B) → B</strong></li>
+        <li>Apply implication law again: <strong>(A ∩ B)' ∪ B</strong></li>
+        <li>Apply De Morgan: <strong>(A' ∪ B') ∪ B</strong></li>
+        <li>Rearrange (Associativity): <strong>A' ∪ (B' ∪ B)</strong></li>
+        <li>Complement law — B' ∪ B = U: <strong>A' ∪ U</strong></li>
+        <li>Domination law — X ∪ U = U: <strong>U</strong></li>
+      </ol>
+      <p style="margin-top:10px;"><strong>Result: U (the Universal Set)</strong> — this expression is always true (a tautology). It simplifies completely.</p>
+      <p><em>The slides confirm: Complement law, Associative law, Implication law, and De Morgan's Law are all used.</em></p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 5: IMAGE REPRESENTATION / FOURIER -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-header ch-green" id="q12">
+    <div>
+      <div class="ch-num">Chapter 5 · Image Representation</div>
+      <h2>🌊 Complex Numbers & Fourier Transform</h2>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="card">
+    <span class="label green">Question 12 · 15 points</span>
+    <div class="q-header">
+      <div class="q-num">12</div>
+      <div class="q-title">Complex number magnitude/angle, and Fourier Transform steps</div>
+      <div class="pts-badge">15 pts</div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">📐</span>
+      <div><strong>What's a complex number?</strong> A regular number lives on a line (the "real" axis). A complex number lives on a 2D plane — it has a <strong>real part</strong> (x-axis) and an <strong>imaginary part</strong> (y-axis). We write it as a + bi, where i = √(-1). Think of it as a point on a 2D grid.</div>
+    </div>
+
+    <h3>Part A — Complex number (2, 3i): Magnitude & Angle</h3>
+    <p>Imagine drawing an arrow from the origin (0,0) to the point (2, 3i) on a 2D graph. The <strong>magnitude</strong> is the arrow's length. The <strong>angle</strong> is how far it's rotated from the positive x-axis (counterclockwise).</p>
+
+    <div class="two-col">
+      <div class="card-inner green">
+        <h4>📏 Magnitude (length of arrow)</h4>
+        <p>Use the Pythagorean theorem — it's just the hypotenuse of a right triangle:</p>
+        <div class="formula">|z| = √(a² + b²)<br>= √(2² + 3²)<br>= √(4 + 9) = √13</div>
+        <div class="answer"><div class="answer-label">Answer</div>|z| = √13 ≈ <strong>3.606</strong></div>
+      </div>
+      <div class="card-inner teal">
+        <h4>📐 Angle (direction of arrow)</h4>
+        <p>Use the arctangent function — it gives the angle from the x-axis:</p>
+        <div class="formula">θ = arctan(b / a)<br>= arctan(3 / 2)<br>= arctan(1.5)</div>
+        <div class="answer"><div class="answer-label">Answer</div>θ = arctan(1.5) ≈ <strong>56.31°</strong> (or ~0.983 radians)</div>
+      </div>
+    </div>
+
+    <h3>Part B — Steps to implement the Fourier Transform</h3>
+
+    <div class="callout tip">
+      <span class="callout-icon">🎵</span>
+      <div><strong>What is the Fourier Transform, in one sentence?</strong> It breaks any signal (like a sound wave or an image) into its component frequencies — like a prism splits white light into the rainbow. It answers: "what mix of sine waves makes up this signal?"</div>
+    </div>
+
+    <p>Joseph Fourier (1807) proved that <strong>any signal can be represented as a sum of sine waves</strong>. The Fourier Transform finds those sine waves.</p>
+
+    <p>Each sine wave has three properties:</p>
+    <div class="three-col">
+      <div class="card-inner green"><h4>Frequency</h4><p>How fast it oscillates (Hz = cycles per second)</p></div>
+      <div class="card-inner teal"><h4>Amplitude</h4><p>How tall/strong the wave is</p></div>
+      <div class="card-inner purple"><h4>Phase</h4><p>Where in the cycle it starts</p></div>
+    </div>
+
+    <div class="answer">
+      <div class="answer-label">Exam Answer — Steps to implement DFT (from slides)</div>
+      <ol class="steps">
+        <li><strong>Loop over frequencies</strong> — for each frequency you want to analyze:</li>
+        <li>Create a <strong>complex sine wave</strong> with the same number of time points as the signal, at the current frequency. (Using Euler's formula: e^(2πift))</li>
+        <li>Compute the <strong>dot product</strong> between your complex sine wave and the original signal. This tells you how much that frequency is present in the signal.</li>
+        <li>Repeat for all frequencies. End loop.</li>
+        <li>The results are the <strong>Fourier coefficients</strong>. The <strong>magnitude</strong> of each coefficient = amplitude spectrum (how loud each frequency is). The <strong>angle</strong> = phase spectrum.</li>
+      </ol>
+      <p style="margin-top:12px;"><strong>Key insight:</strong> This is essentially comparing your signal against each possible frequency using a dot product. High dot product = that frequency is strongly present in your signal.</p>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">⚡</span>
+      <div><strong>Fast Fourier Transform (FFT):</strong> Instead of looping frequency by frequency (slow), the FFT puts all the sine waves into a <strong>matrix</strong> and does one big matrix multiplication. Same result, way faster — this is why your phone can run music apps in real time.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FINAL CRAM CARD -->
+<div class="chapter">
+  <div class="card" style="border: 2px solid var(--accent2); background: linear-gradient(135deg, #1a1505, #0f0e17);">
+    <h3 style="color: var(--accent2); font-size:1.4em; margin-bottom: 20px;">⚡ 60-Second Cram Card — All Exam Answers</h3>
+    <div class="three-col">
+      <div>
+        <span class="label red">Q1 — Fibonacci</span>
+        <p>Iterative: <strong>O(n)</strong> ✓<br>Recursive: <strong>O(2ⁿ)</strong> 💀</p>
+        <span class="label red">Q2 — List type</span>
+        <p><strong>Circular Doubly Linked List</strong><br>Scattered memory, 2 pointers per node</p>
+        <span class="label red">Q3 — Heaps</span>
+        <p>Min: parent ≤ children, root = smallest<br>Max: parent ≥ children, root = largest</p>
+        <span class="label red">Q4 — Collisions</span>
+        <p>Chaining = linked list at slot<br>Probing = find next empty slot</p>
+      </div>
+      <div>
+        <span class="label teal">Q5 — Binary math</span>
+        <p>Addition result: <strong>00100.010</strong><br>Multiply: partial sums, then place decimal</p>
+        <span class="label teal">Q6 — Conversions</span>
+        <p>Hex: <strong>1B.A</strong> (groups of 4 bits)<br>Octal: <strong>33.5</strong> (groups of 3 bits)<br>1s Comp: <strong>00100.010</strong> (flip all)<br>IEEE: sign|exp+127|mantissa 23-bit</p>
+      </div>
+      <div>
+        <span class="label purple">Q7 — Logic gates</span>
+        <p><strong>Q = AB + BC</strong></p>
+        <span class="label purple">Q8 — ASCII</span>
+        <p>01001110 01101111 00100001 = <strong>"No!"</strong></p>
+        <span class="label purple">Q9 — Text encoding</span>
+        <p>BoW = word frequency vector<br>One-hot: single 1 per word vector</p>
+        <span class="label yellow">Q10–11 — Sets</span>
+        <p>A→B = A'∪B (implication law)<br>Q11 simplifies to <strong>U</strong> (tautology)</p>
+        <span class="label green">Q12 — Fourier</span>
+        <p>|z|=√13≈3.606, θ≈56.31°<br>DFT: loop → sine wave → dot product</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>D321 Data Representation · Spring 2026 · Indiana University · Good luck — you actually know this now. 🚀</footer>
+
+</body>
+</html>
