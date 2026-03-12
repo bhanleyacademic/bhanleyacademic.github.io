@@ -10,6 +10,13 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/presentations">Presentations</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
+			<div class="dropdown">
+				<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">AI ▾</button>
+				<div class="dropdown-menu">
+					<div class="dropdown-section">Study Guides</div>
+					<a href="/ai/study-guides/big-o">Big O Notation</a>
+				</div>
+			</div>
 		</div>
 		<div class="social-links">
 			<a href="https://bsky.app/profile/food-and-data.bsky.social" target="_blank">
@@ -76,5 +83,61 @@ import { SITE_TITLE } from '../consts';
 		.social-links {
 			display: none;
 		}
+	}
+
+	/* Dropdown */
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+	.dropdown-toggle {
+		background: none;
+		border: none;
+		cursor: pointer;
+		font: inherit;
+		padding: 1em 0.5em;
+		color: var(--black);
+		border-bottom: 4px solid transparent;
+	}
+	.dropdown-toggle:hover {
+		color: rgb(var(--accent));
+	}
+	.dropdown-toggle.active {
+		border-bottom-color: rgb(var(--accent));
+	}
+	.dropdown-menu {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background: white;
+		box-shadow: 0 4px 12px rgba(var(--black), 10%);
+		border-radius: 6px;
+		min-width: 180px;
+		z-index: 100;
+		padding: 0.5rem 0;
+	}
+	.dropdown:hover .dropdown-menu,
+	.dropdown-menu:hover {
+		display: block;
+	}
+	.dropdown-section {
+		padding: 0.4rem 1rem 0.2rem;
+		font-size: 0.7em;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+		font-weight: 600;
+	}
+	.dropdown-menu a {
+		display: block;
+		padding: 0.4rem 1rem;
+		font-size: 0.9em;
+		color: var(--black);
+		border-bottom: none;
+	}
+	.dropdown-menu a:hover {
+		background: rgb(var(--gray-light), 0.5);
+		color: rgb(var(--accent));
 	}
 </style>

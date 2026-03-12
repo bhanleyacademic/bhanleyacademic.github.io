@@ -1,0 +1,39 @@
+---
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title="Big O Notation — Visual Guide" description="An interactive visual guide to Big O notation and algorithm complexity." />
+    <style>
+      body, html { margin: 0; padding: 0; height: 100%; }
+      .page-wrap {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .iframe-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      iframe {
+        flex: 1;
+        width: 100%;
+        border: none;
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+      <Header />
+      <div class="iframe-container">
+        <iframe src="/study-guides/big-o.html" title="Big O Notation — Visual Guide"></iframe>
+      </div>
+      <Footer />
+    </div>
+  </body>
+</html>
