@@ -11,7 +11,7 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/presentations">Presentations</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 			<div class="dropdown">
-				<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">AI ▾</button>
+				<a href="/ai" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">AI ▾</a>
 				<div class="dropdown-menu">
 					<div class="dropdown-section">Study Guides</div>
 					<a href="/ai/study-guides/big-o">Big O Notation</a>
@@ -94,13 +94,13 @@ import { SITE_TITLE } from '../consts';
 		display: inline-block;
 	}
 	.dropdown-toggle {
-		background: none;
-		border: none;
+		display: inline-block;
 		cursor: pointer;
 		font: inherit;
 		padding: 1em 0.5em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
+		text-decoration: none;
 	}
 	.dropdown-toggle:hover {
 		color: rgb(var(--accent));

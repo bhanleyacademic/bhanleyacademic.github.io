@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Guide Citations — D321 Spring 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #faf9f6;
+  --ink: #1c1917;
+  --muted: #78716c;
+  --rule: #e7e5e0;
+  --accent: #b45309;
+  --accent-bg: #fffbeb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Lora', Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.75;
+  padding: 60px 24px 80px;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+
+/* HEADER */
+.page-header { border-bottom: 2px solid var(--ink); padding-bottom: 20px; margin-bottom: 40px; }
+.page-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6em, 4vw, 2.4em);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.page-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78em;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.page-meta span::before { content: '— '; }
+
+/* SECTION */
+.section { margin-bottom: 48px; }
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+}
+
+/* SOURCE FILES */
+.file-list { display: flex; flex-direction: column; gap: 12px; }
+.file-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: #fff;
+}
+.file-icon {
+  font-size: 1.4em;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.file-meta { flex: 1; min-width: 0; }
+.file-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+  word-break: break-all;
+}
+.file-desc { font-size: 0.88em; color: var(--muted); }
+.file-type {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--rule);
+  color: var(--muted);
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* PROMPTS */
+.prompt-list { display: flex; flex-direction: column; gap: 28px; }
+.prompt-item { display: flex; gap: 20px; }
+.prompt-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75em;
+  color: var(--muted);
+  flex-shrink: 0;
+  width: 28px;
+  padding-top: 3px;
+  text-align: right;
+}
+.prompt-content { flex: 1; border-left: 2px solid var(--rule); padding-left: 20px; }
+.prompt-text {
+  font-style: italic;
+  font-size: 0.97em;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.prompt-text::before { content: '\201C'; }
+.prompt-text::after { content: '\201D'; }
+.prompt-outputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.output-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68em;
+  padding: 3px 10px;
+  border-radius: 3px;
+  background: var(--accent-bg);
+  border: 1px solid #d97706;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+a.output-tag:hover { background: #fef3c7; }
+.fname a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+.fname a:hover { color: var(--accent); }
+.output-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* OUTPUTS TABLE */
+.outputs-table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+.outputs-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--rule);
+}
+.outputs-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.outputs-table tr:last-child td { border-bottom: none; }
+.fname {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85em;
+  color: var(--ink);
+}
+.ftype-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7em;
+  padding: 1px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.badge-html { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+.badge-pdf  { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+
+/* TOOL NOTE */
+.tool-note {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 16px 18px;
+  font-size: 0.88em;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.tool-note strong { color: var(--ink); }
+
+/* FOOTER */
+footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72em;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <span class="page-label">Methodology &amp; Attribution</span>
+    <h1>D321 Study Guide<br>Generation Record</h1>
+    <div class="page-meta">
+      <span>D321 Data Representation</span>
+      <span>Indiana University, Spring 2026</span>
+      <span>Generated March 11–12, 2026</span>
+      <span>Tool: Claude Sonnet 4.6 (Anthropic)</span>
+    </div>
+  </div>
+
+  <!-- SOURCE MATERIALS -->
+  <div class="section">
+    <div class="section-title">01 · Source Materials Provided</div>
+    <div class="file-list">
+
+      <div class="file-item">
+        <div class="file-icon">📄</div>
+        <div class="file-meta">
+          <div class="file-name">Mock_Mid-term_Exam.pdf</div>
+          <div class="file-desc">Mock midterm examination for D321, containing all 12 questions across five topic areas: Data Structures &amp; Algorithms, Binary/Octal/Hexadecimal Representations, Character Encoding &amp; Text Representation, Relations, and Image Representation. Total: 100 points.</div>
+        </div>
+        <div class="file-type">PDF</div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-icon">📄</div>
+        <div class="file-meta">
+          <div class="file-name">Tables.pdf</div>
+          <div class="file-desc">Reference tables provided alongside the exam, including the cosine similarity equation, Algebra of Sets laws, logic gate symbol reference, and example data tables for the Relations questions (sets A, M, P and the Knows relation).</div>
+        </div>
+        <div class="file-type">PDF</div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-icon">📊</div>
+        <div class="file-meta">
+          <div class="file-name">D321_Review_March_10-Modules1-7.pptx</div>
+          <div class="file-desc">Lecture review slides from March 10, 2026, covering Modules 1–7. Used as the primary answer key source — all exam answers and worked examples in the study guides were drawn from this presentation. Instructor: Nasim Anousheh, Ph.D.</div>
+        </div>
+        <div class="file-type">PPTX</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PROMPTS -->
+  <div class="section">
+    <div class="section-title">02 · Prompts</div>
+    <div class="prompt-list">
+
+      <div class="prompt-item">
+        <div class="prompt-num">1</div>
+        <div class="prompt-content">
+          <div class="prompt-text">I need a study guide for this mock exam (answers are in the powerpoint) that gives the concepts for what will be on it in an easy way to study for someone with ADHD</div>
+          <span class="output-label">Outputs generated</span>
+          <div class="prompt-outputs">
+            <a href="/ai/study-guides/d321-study-guide" class="output-tag">D321_Study_Guide.html</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-item">
+        <div class="prompt-num">2</div>
+        <div class="prompt-content">
+          <div class="prompt-text">Also assume I have not been paying attention AT ALL this semester.</div>
+          <span class="output-label">Outputs generated</span>
+          <div class="prompt-outputs">
+            <a href="/ai/study-guides/d321-full-guide" class="output-tag">D321_Full_Guide.html</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-item">
+        <div class="prompt-num">3</div>
+        <div class="prompt-content">
+          <div class="prompt-text">Ok...so there's some foundational stuff when it comes to logic and symbols that still escape me. Mainly I can type these things in latex, but my brain has a hard time reading and translating these things. Like the \cup and \cap actual meanings. My professor gave me great advice to think of \pi like picking things from the first column and \sigma like searching the 2nd column. But logic (and just a lot of higher math symbology) is tough to keep in my head. Can you help me with that?</div>
+          <span class="output-label">Outputs generated</span>
+          <div class="prompt-outputs">
+            <a href="/ai/study-guides/symbol-decoder" class="output-tag">symbol_decoder.html</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-item">
+        <div class="prompt-num">4</div>
+        <div class="prompt-content">
+          <div class="prompt-text">Awesome. Is it also possible to make printable versions of all of these (Sorry, I'm a tactile learner but also enjoy the convenience of being able to put these on my server, plus the HTMLs are really beautiful and helpful)? Also...other stupid question. I'm terrible at identifying time and space complexities for O notation. Can you make both an interactive and printable for that as well?</div>
+          <span class="output-label">Outputs generated</span>
+          <div class="prompt-outputs">
+            <a href="/ai/study-guides/big-o" class="output-tag">big_o_interactive.html</a>
+            <span class="output-tag">big_o_print.pdf</span>
+            <span class="output-tag">symbols_print.pdf</span>
+            <span class="output-tag">study_guide_print.pdf</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-item">
+        <div class="prompt-num">5</div>
+        <div class="prompt-content">
+          <div class="prompt-text">What's XOR?</div>
+          <span class="output-label">Outputs generated</span>
+          <div class="prompt-outputs">
+            <span class="output-tag">Inline explanation (no file)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-item">
+        <div class="prompt-num">6</div>
+        <div class="prompt-content">
+          <div class="prompt-text">Do you think you could give me a citation of the prompts I have asked you and provided you in HTML format to generate these study guides for my website?</div>
+          <span class="output-label">Outputs generated</span>
+          <div class="prompt-outputs">
+            <span class="output-tag">citation.html</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- OUTPUTS -->
+  <div class="section">
+    <div class="section-title">03 · Generated Files</div>
+    <table class="outputs-table">
+      <tr>
+        <th>File</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td class="fname"><a href="/ai/study-guides/d321-study-guide">D321_Study_Guide.html</a></td>
+        <td><span class="ftype-badge badge-html">HTML</span></td>
+        <td>First-pass ADHD-friendly study guide. Color-coded by topic, clickable answer reveals, cram card summary.</td>
+      </tr>
+      <tr>
+        <td class="fname"><a href="/ai/study-guides/d321-full-guide">D321_Full_Guide.html</a></td>
+        <td><span class="ftype-badge badge-html">HTML</span></td>
+        <td>Comprehensive "start from zero" guide. Every concept explained from first principles before the exam answer. Includes analogies, visualizations, and code examples.</td>
+      </tr>
+      <tr>
+        <td class="fname"><a href="/ai/study-guides/symbol-decoder">symbol_decoder.html</a></td>
+        <td><span class="ftype-badge badge-html">HTML</span></td>
+        <td>Interactive math symbol reference. Covers set theory (∪ ∩ ∈ ⊆ A' ∅), logic connectives (→ ↔ ∧ ∨ ¬), relational algebra (π σ ⋈ ×), and quantifiers (∀ ∃). Each symbol includes a shape-based memory hook, LaTeX notation, and worked examples. Filterable by category.</td>
+      </tr>
+      <tr>
+        <td class="fname"><a href="/ai/study-guides/big-o">big_o_interactive.html</a></td>
+        <td><span class="ftype-badge badge-html">HTML</span></td>
+        <td>Interactive Big O notation guide. Includes a live growth-rate chart (O(1) through O(n!)), expandable cards per complexity class with code patterns, memory hooks, time vs space comparison, and a "how to identify Big O from code" reference grid.</td>
+      </tr>
+      <tr>
+        <td class="fname">study_guide_print.pdf</td>
+        <td><span class="ftype-badge badge-pdf">PDF</span></td>
+        <td>Print-optimized version of the full exam study guide. All 12 questions with answers, step-by-step proofs, and a cram card. US Letter format.</td>
+      </tr>
+      <tr>
+        <td class="fname">symbols_print.pdf</td>
+        <td><span class="ftype-badge badge-pdf">PDF</span></td>
+        <td>Print-optimized symbol decoder. Full Rosetta Stone table (Logic ↔ Sets ↔ SQL). US Letter format.</td>
+      </tr>
+      <tr>
+        <td class="fname">big_o_print.pdf</td>
+        <td><span class="ftype-badge badge-pdf">PDF</span></td>
+        <td>Print-optimized Big O reference. Identification guide, per-complexity cards, space complexity table, and 30-second cheat sheet. US Letter format.</td>
+      </tr>
+      <tr>
+        <td class="fname">citation.html</td>
+        <td><span class="ftype-badge badge-html">HTML</span></td>
+        <td>This document.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- TOOL NOTE -->
+  <div class="section">
+    <div class="section-title">04 · Generation Tool</div>
+    <div class="tool-note">
+      All study materials in this collection were generated using <strong>Claude Sonnet 4.6</strong>, a large language model developed by <strong>Anthropic, PBC</strong>. Accessed via <strong>Claude.ai</strong> on March 11–12, 2026.<br><br>
+      Content accuracy was verified against the instructor-provided review slides (<em>D321_Review_March_10-Modules1-7.pptx</em>). All exam answers, worked examples, and law references are sourced from that document. The generative model supplied explanations, analogies, memory hooks, code examples, and visual design.
+    </div>
+  </div>
+
+  <footer>
+    <span>D321 Data Representation · Indiana University · Spring 2026</span>
+    <span>Generated with Claude Sonnet 4.6 · Anthropic</span>
+  </footer>
+
+</div>
+</body>
+</html>
