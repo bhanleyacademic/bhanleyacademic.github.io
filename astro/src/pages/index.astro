@@ -9,23 +9,129 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 3em 1em 4em;
+			}
+
+			/* Hero */
+			.hero {
+				display: flex;
+				align-items: center;
+				gap: 2.5rem;
+				margin-bottom: 3rem;
+			}
+			.hero-photo {
+				width: 130px;
+				height: 130px;
+				border-radius: 50%;
+				object-fit: cover;
+				flex-shrink: 0;
+				box-shadow: var(--box-shadow);
+			}
+			.hero-text h1 {
+				font-size: 2.2em;
+				margin-bottom: 0.15em;
+			}
+			.hero-text .tagline {
+				font-size: 1em;
+				color: rgb(var(--gray));
+				margin-bottom: 0.75em;
+				letter-spacing: 0.03em;
+			}
+			.hero-text p {
+				font-size: 0.95em;
+				line-height: 1.65;
+				margin: 0;
+				color: rgb(var(--gray-dark));
+			}
+
+			/* Cards */
+			.cards {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.25rem;
+				margin-top: 2.5rem;
+			}
+			.card {
+				display: block;
+				padding: 1.25rem 1rem;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 10px;
+				text-decoration: none;
+				color: inherit;
+				transition: box-shadow 0.2s ease, border-color 0.2s ease;
+			}
+			.card:hover {
+				box-shadow: var(--box-shadow);
+				border-color: rgb(var(--gray));
+			}
+			.card-icon {
+				font-size: 1.6em;
+				margin-bottom: 0.5rem;
+				display: block;
+			}
+			.card h2 {
+				font-size: 1em;
+				margin-bottom: 0.25rem;
+				color: rgb(var(--black));
+			}
+			.card p {
+				font-size: 0.8em;
+				color: rgb(var(--gray));
+				margin: 0;
+				line-height: 1.5;
+			}
+
+			@media (max-width: 600px) {
+				.hero {
+					flex-direction: column;
+					text-align: center;
+					gap: 1.25rem;
+				}
+				.cards {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>Hello, World!</h1>
-			<p>
-				I'm Brian, a Data Science and Anthropology major at Indiana University. I have a diverse academic background in Computer Science, Anthropology, and Psychology. Solving
-				complex problems using data-driven approaches and building innovative human-centered solutions is my goal.
-			</p>
-			<p>
-				Throughout my academic journey and professional experiences, I have worked on a wide range of projects for small business up to enterprise solutions.
-				Each step of my journey has strengthened my expertise in Python, data analysis, and machine learning while allowing me to explore the deep social
-				and cultural dimensions of technology along the way.
-			</p>
-			<p>
-				Here you will find my latest projects, research, and presentations that showcase my ever growing skills. Let's connect and create something together.
-			</p>
+			<div class="hero">
+				<img class="hero-photo" src="/brian-hanley.png" alt="Brian Hanley" />
+				<div class="hero-text">
+					<h1>Brian Hanley</h1>
+					<p class="tagline">Student · Programmer · Chef</p>
+					<p>
+						Data Science &amp; Anthropology student at Indiana University. I work at the intersection of
+						technology, culture, and data — building things that are both analytically rigorous and human-centered.
+					</p>
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="cards">
+				<a class="card" href="/blog">
+					<span class="card-icon">✍️</span>
+					<h2>Blog</h2>
+					<p>Writing on data, tech, culture, and whatever else is on my mind.</p>
+				</a>
+				<a class="card" href="/presentations">
+					<span class="card-icon">📊</span>
+					<h2>Presentations</h2>
+					<p>Slides and talks from academic and professional work.</p>
+				</a>
+				<a class="card" href="/ai">
+					<span class="card-icon">🧠</span>
+					<h2>AI Study Guides</h2>
+					<p>Interactive guides I've built with Claude for coursework.</p>
+				</a>
+			</div>
 		</main>
 		<Footer />
 	</body>
