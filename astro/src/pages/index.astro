@@ -22,7 +22,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				display: flex;
 				align-items: center;
 				gap: 2.5rem;
-				margin-bottom: 3rem;
+				margin-bottom: 2.5rem;
 			}
 			.hero-photo {
 				width: 130px;
@@ -37,16 +37,31 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				margin-bottom: 0.15em;
 			}
 			.hero-text .tagline {
-				font-size: 1em;
+				font-size: 0.9em;
 				color: rgb(var(--gray));
 				margin-bottom: 0.75em;
-				letter-spacing: 0.03em;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+				font-weight: 600;
 			}
 			.hero-text p {
 				font-size: 0.95em;
-				line-height: 1.65;
-				margin: 0;
+				line-height: 1.7;
+				margin: 0 0 0.6em;
 				color: rgb(var(--gray-dark));
+			}
+			.hero-text p:last-child {
+				margin-bottom: 0;
+			}
+
+			/* Section label */
+			.section-label {
+				font-size: 0.75em;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				font-weight: 700;
+				color: rgb(var(--gray));
+				margin: 2.5rem 0 1rem;
 			}
 
 			/* Cards */
@@ -54,7 +69,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
 				gap: 1.25rem;
-				margin-top: 2.5rem;
 			}
 			.card {
 				display: block;
@@ -86,6 +100,38 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				line-height: 1.5;
 			}
 
+			/* Recent posts */
+			.post-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.post-list li {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 1rem;
+				padding: 0.65rem 0;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				font-size: 0.9em;
+			}
+			.post-list li:last-child {
+				border-bottom: none;
+			}
+			.post-list a {
+				color: rgb(var(--black));
+				text-decoration: none;
+			}
+			.post-list a:hover {
+				color: rgb(var(--accent));
+			}
+			.post-list .post-date {
+				font-size: 0.8em;
+				color: rgb(var(--gray));
+				white-space: nowrap;
+				flex-shrink: 0;
+			}
+
 			@media (max-width: 600px) {
 				.hero {
 					flex-direction: column;
@@ -94,6 +140,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				}
 				.cards {
 					grid-template-columns: 1fr;
+				}
+				.post-list li {
+					flex-direction: column;
+					gap: 0.2rem;
 				}
 			}
 		</style>
@@ -105,28 +155,52 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				<img class="hero-photo" src="/brian-hanley.png" alt="Brian Hanley" />
 				<div class="hero-text">
 					<h1>Brian Hanley</h1>
-					<p class="tagline">Student · Programmer · Chef</p>
+					<p class="tagline">Data Science &amp; Anthropology · Indiana University</p>
 					<p>
-						Data Science &amp; Anthropology student at Indiana University. I work at the intersection of
-						technology, culture, and data — building things that are both analytically rigorous and human-centered.
+						This site is a living record of my academic and professional work, both inside and outside IU.
+						It covers applied research, higher education operations, data pipelines, and the occasional
+						project that does not fit neatly into any of those categories.
+					</p>
+					<p>
+						My background combines data science, anthropology, and computer science. Most of my work sits
+						at the intersection of quantitative methods and human systems: how people move through
+						institutions, how markets behave under pressure, how training programs succeed or fail.
 					</p>
 				</div>
 			</div>
 
 			<hr />
 
+			<p class="section-label">Explore</p>
 			<div class="cards">
 				<a class="card" href="/blog">
 					<span class="card-icon">✍️</span>
 					<h2>Blog</h2>
-					<p>Writing on data, tech, culture, and whatever else is on my mind.</p>
+					<p>Research writeups, operational analysis, and applied projects.</p>
 				</a>
 				<a class="card" href="/presentations">
 					<span class="card-icon">📊</span>
 					<h2>Presentations</h2>
 					<p>Slides and talks from academic and professional work.</p>
 				</a>
+				<a class="card" href="/cv">
+					<span class="card-icon">📄</span>
+					<h2>CV</h2>
+					<p>Education, experience, and skills.</p>
+				</a>
 			</div>
+
+			<p class="section-label">Recent Posts</p>
+			<ul class="post-list">
+				<li>
+					<a href="/blog/wow-economics-ban-wave">World of Warcraft as an Economic Laboratory: What a Ban Wave Taught Us About Supply and Demand</a>
+					<span class="post-date">Mar 17, 2026</span>
+				</li>
+				<li>
+					<a href="/blog/rethinking-parttime-training">Rethinking Part-Time Staff Training: From Weeks to Hours</a>
+					<span class="post-date">Nov 18, 2025</span>
+				</li>
+			</ul>
 		</main>
 		<Footer />
 	</body>
