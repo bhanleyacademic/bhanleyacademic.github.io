@@ -18,41 +18,49 @@
 	</svg>
 </button>
 
-<script>
-	const toggle = document.getElementById('theme-toggle');
-	const html = document.documentElement;
+<script is:inline>
+	(function () {
+		var html = document.documentElement;
 
-	function getTheme() {
-		return localStorage.getItem('theme') ??
-			(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-	}
-
-	function applyTheme(theme: string) {
-		if (theme === 'dark') {
-			html.classList.add('dark');
-		} else {
-			html.classList.remove('dark');
+		function getTheme() {
+			var stored = localStorage.getItem('theme');
+			if (stored === 'dark' || stored === 'light') return stored;
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 		}
-		updateIcons(theme);
-	}
 
-	function updateIcons(theme: string) {
-		const sun = document.getElementById('icon-sun');
-		const moon = document.getElementById('icon-moon');
-		if (sun && moon) {
-			sun.style.display = theme === 'dark' ? 'block' : 'none';
-			moon.style.display = theme === 'dark' ? 'none' : 'block';
+		function applyTheme(theme) {
+			if (theme === 'dark') {
+				html.classList.add('dark');
+			} else {
+				html.classList.remove('dark');
+			}
+			var sun = document.getElementById('icon-sun');
+			var moon = document.getElementById('icon-moon');
+			if (sun && moon) {
+				sun.style.display = theme === 'dark' ? 'block' : 'none';
+				moon.style.display = theme === 'dark' ? 'none' : 'block';
+			}
 		}
-	}
 
-	applyTheme(getTheme());
+		applyTheme(getTheme());
 
-	toggle?.addEventListener('click', () => {
-		const current = html.classList.contains('dark') ? 'dark' : 'light';
-		const next = current === 'dark' ? 'light' : 'dark';
-		localStorage.setItem('theme', next);
-		applyTheme(next);
-	});
+		// Update when OS preference changes (only if user hasn't manually set a preference)
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+			if (!localStorage.getItem('theme')) {
+				applyTheme(e.matches ? 'dark' : 'light');
+			}
+		});
+
+		var toggle = document.getElementById('theme-toggle');
+		if (toggle) {
+			toggle.addEventListener('click', function () {
+				var current = html.classList.contains('dark') ? 'dark' : 'light';
+				var next = current === 'dark' ? 'light' : 'dark';
+				localStorage.setItem('theme', next);
+				applyTheme(next);
+			});
+		}
+	})();
 </script>
 
 <style>
