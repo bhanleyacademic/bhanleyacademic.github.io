@@ -163,6 +163,8 @@ The index averaged around 100-125 in the week before the ban wave, consistent wi
 
 For context: the US Federal Reserve targets a 2% *annual* inflation rate. The WoW economy experienced a 7% price level increase within two days, driven entirely by a supply shock.
 
+If you look closely at the figure, there is a sharp spike on March 13, well before the ban wave. That is not a second event. It is a data artifact. Blue Dye (item 6260), a vendor-sold reagent included in the basket as a control item, had its bot listings expire between two snapshots. Bots normally buy Blue Dye from NPC vendors for about 0.01g and relist it at the same price, keeping the market flooded. When those listings expired simultaneously, only 12 listings remained, priced at around 195g. The index briefly spiked to roughly 914 before new cheap supply appeared two hours later and prices returned to normal. It is a good illustration of a real limitation: when a Laspeyres index includes items with bot-suppressed floor prices, a temporary lapse in that supply looks indistinguishable from a genuine price shock. The ban-wave analysis accounts for this by excluding vendor items from all elasticity calculations.
+
 ---
 
 ## What This Tells Us About Real Economies
