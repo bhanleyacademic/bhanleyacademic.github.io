@@ -31,15 +31,15 @@ Then something unexpected happened.
 
 ## March 17: The Ban Wave
 
-At approximately 5:00 AM UTC on March 17, Blizzard executed a mass ban wave targeting accounts that had been exploiting an undisclosed in-game mechanic. These were not just a handful of accounts; they were bot operations that had been continuously farming raw materials and listing them on the Auction House at rock-bottom prices.
+At approximately 5:00 AM UTC on March 17, Blizzard executed a mass ban wave targeting accounts that had been exploiting an undisclosed in-game mechanic. This occurred during patch 12.0.1 of the Midnight expansion, which had launched only 15 days earlier on March 2. These were not just a handful of accounts; they were bot operations that had been continuously farming raw materials and listing them on the Auction House at rock-bottom prices.
 
 I did not know any of this when I looked at the data that morning. I just saw this:
 
-![Item 2320 price and listing count collapsing at 05:15 UTC on March 17](/wow-econ/fig1_ban_wave_signal.png)
+![Tattered Wildercloth price and listing count collapsing at 05:15 UTC on March 17](/wow-econ/fig1_ban_wave_signal.png)
 
-*Item 2320: median price (top panel) and active listings (bottom panel) over March 15-18. The dashed line is 05:15 UTC, March 17.*
+*Tattered Wildercloth (item 193050): median price (top panel) and active listings (bottom panel) over March 15-18. The dashed line is 05:15 UTC, March 17.*
 
-Between the 04:15 snapshot and the 05:15 snapshot, a single hour, one item went from **164 active sellers to 39**. Its price jumped from **0.01 gold to 0.12 gold**, a 12x increase in 60 minutes.
+Between the 04:15 snapshot and the 05:15 snapshot, a single hour, Tattered Wildercloth went from **141 active sellers to 75**. Its price jumped from **0.23 gold to 1.00 gold**, a 4.35x increase in 60 minutes.
 
 That is not a gradual market shift. That is a supply collapse.
 
@@ -63,16 +63,16 @@ The classification:
 - $|\varepsilon_D| > 1$: **elastic** -- buyers are price-sensitive and cut back sharply
 - $|\varepsilon_D| < 1$: **inelastic** -- buyers keep buying despite the price increase
 
-For item 2320, the numbers were:
+For Tattered Wildercloth (item 193050), the numbers were:
 
 | | Before ban wave (48h avg) | After ban wave (48h avg) |
 |---|---|---|
-| Median price | 0.01g | 0.12g |
-| Quantity available | ~2.8M units | ~890K units |
+| Median price | 0.2451g | 0.4383g |
+| Quantity available | ~138,200 units | ~118,600 units |
 
-$$\varepsilon_D \approx \frac{-120\%}{+188\%} \approx -0.64$$
+$$\varepsilon_D \approx \frac{-15.3\%}{+56.5\%} \approx -0.27$$
 
-**Inelastic.** Even after the price jumped 188%, buyers only reduced purchases by 120%. They still needed the item. Across all five items tested, every one came back inelastic. These are functional goods (crafting materials, consumables, not luxuries). Players buying them for raids and professions are going to buy them regardless of price fluctuations.
+**Inelastic.** Even after the price nearly doubled, buyers only reduced purchases by 15%. They still needed it. Across all tested items, every bot-farmed crafting material came back inelastic. These are functional goods used in professions and raid preparation. Players do not stop crafting because cloth got more expensive.
 
 This mirrors real-world commodity markets. Gasoline demand is inelastic in the short run: people do not immediately stop driving when prices spike at the pump. They might adjust over months, but immediate demand barely moves.
 
@@ -90,7 +90,7 @@ $$\Delta P^* = \frac{\bar{Q}^{s,\mathcal{B}}}{\beta + \delta}$$
 
 Where $\beta$ is how steeply demand falls with price and $\delta$ is how steeply supply rises with price. The key insight: the price impact is **larger** when the bots supplied a big fraction of the total market *and* when the remaining suppliers are slow to respond (low $\delta$).
 
-For item 2320, bots had been providing approximately 68% of total supply. With that much supply removed at once, and with inelastic demand ($\beta$ is small), the price shock was severe and persistent.
+For Tattered Wildercloth, bots had been providing approximately 47% of total supply. With that much supply removed at once, and with inelastic demand ($\beta$ is small), the price shock was severe and persistent.
 
 ---
 
