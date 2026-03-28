@@ -115,6 +115,36 @@ Blizzard built a system where committing to a profession means something. They h
 
 ---
 
+## What Actually Happened: The Ten-Day Recovery
+
+This post was written on March 19, two days after the difficulty change. The data now extends through March 28. The short answer is that the market recovered, but unevenly, and in ways that reveal something about how players respond to irreversibility.
+
+The Q1 missive price declined back toward baseline within about ten days. From a peak of roughly **1,000g** on March 18, prices fell steadily: **419g** average through March 21, **237g** average through March 28, landing near **180g** today. Pre-nerf baseline was around 160g. By that measure the Q1 market is essentially normal, about 13% above baseline and within the range of seasonal fluctuation.
+
+The Q2 market tells a stranger story.
+
+In the first hours after the change, Q2 missive prices reached nearly **15,000g** as buyers competed for supply that had essentially disappeared. That was not a real market price. It was a liquidation price, what buyers pay when nine listings exist in the world and you need one tonight. Over the following 24 hours, prices fell to roughly 3,500g. Within a week, they were back below 1,000g. By March 28, Q2 missives were clearing around **500g**, less than half the **1,112g** average they commanded in the two weeks before the nerf.
+
+The quality spread compressed further than the change would have predicted. Pre-nerf, Q2 commanded roughly a 7x premium over Q1. In the 48 hours after the nerf, when Q2 supply was near zero, the spread briefly reached 100x or more. As of March 28, Q2 prices roughly 2.75x Q1. The premium did not recover. It compressed below the level the original post measured.
+
+There are two plausible explanations for the Q2 collapse. The first is new supply from players who had not yet spent their KP: scribes who rolled characters after launch, or players with unallocated points who specced correctly under the new thresholds and entered the Q2 market during the arbitrage window. Existing scribes could not reallocate; that is the central grievance this post describes. The second explanation is demand contraction. Buyers who could not source Q2 missives at reasonable prices during the disruption found substitutes or deferred the upgrade, and that demand did not fully return. Both likely contributed. The listing count suggests supply did not recover to pre-nerf levels: as of March 28, only **16** Q2 missive listings were active, compared to **63 to 73** before the change. Price follows the marginal seller, and a small number of correctly-specced new scribes is enough to suppress a thin market. The scribes who were permanently locked out of Q2 by the difficulty change are not the ones posting at 500g. They are not posting at all.
+
+---
+
+## A Second-Order Effect: The Reagent Market
+
+A secondary effect appeared in the upstream market. Five high-volume Inscription reagents tracked across the same period declined an average of **44.5%** from their pre-event baselines, compared to **14.6%** for a matched control group of similar-tier crafting materials from other professions over the same window. Restricting to these five high-confidence inscription-correlated reagents and excluding thin-market outliers, a Welch two-sample t-test yields t = -4.03, p < 0.001. Broader operationalizations of the treatment group, using correlation thresholds across all commodity items, do not reach significance, so this result should be interpreted with the sample size and selection criteria in mind.
+
+The mechanism is straightforward: scribes who lost Q2 access did not just stop posting missives. They stopped buying materials. Reduced crafting activity compressed reagent demand, and lower input costs created a lower floor for the remaining Q2 producers. The price collapse of the Q2 missive below its pre-nerf baseline is not simply a demand story. It is also a production cost story. The nerf restructured both sides of the market simultaneously.
+
+One important limitation applies to this finding. The period following a new expansion launch naturally sees declining material prices as more players reach maximum level, farming supply increases, and early demand peaks recede heading into Season 1. The control group decline of 14.6% reflects that baseline seasonal pressure. The Inscription-specific excess of roughly 30 percentage points appears attributable to the nerf, but without price data from a comparable expansion launch for comparison, it is not possible to rule out that Inscription materials were already on a steeper seasonal trajectory than the control group for unrelated reasons. The statistical separation is meaningful; the causal attribution carries the usual caveats of observational data.
+
+This is consistent with what the original post described as the rational response to an environment with irreversible player investment and adjustable developer rules. The data shows that some scribes exited the Q2 market entirely and some buyers adjusted their demand accordingly. The market did not reequilibrate at 1,112g. It reequilibrated at 500g, with a fraction of the participants on each side and input costs roughly 30 percentage points below where they were before.
+
+Whether that constitutes a rebound depends on what the market is supposed to be doing. On price alone, ten days looks like a recovery. On market depth, participation, and the upstream economy that supported it, the data looks like a permanent contraction.
+
+---
+
 ## Sources
 
 - genobeam. "Recipe difficulty tuning with no warning." *r/woweconomy*, March 19, 2026. [reddit.com/r/woweconomy/comments/1ry2ffv](https://www.reddit.com/r/woweconomy/comments/1ry2ffv/)
@@ -122,4 +152,4 @@ Blizzard built a system where committing to a profession means something. They h
 - Jezartroz. "Professions System Overview: Crafting Orders, Crafting Specializations, Reagents." *Wowhead* (current, Midnight). [wowhead.com](https://www.wowhead.com/guide/professions/overview)
 - "Professions System Overview." *Wowhead*, archived September 9, 2024 (The War Within). [web.archive.org](https://web.archive.org/web/20240909013857/https://www.wowhead.com/guide/professions/overview)
 - Archimtiros. "Simplifying Crafting Professions and Reagents in Midnight." *Wowhead*. [wowhead.com](https://www.wowhead.com/news/simplifying-crafting-professions-and-reagents-in-midnight-378932)
-- Price data: hourly Auction House commodity snapshots, US region, March 5-19, 2026. Collected via Blizzard Battle.net API.
+- Price data: hourly Auction House commodity snapshots, US region, March 5-28, 2026. Collected via Blizzard Battle.net API.
