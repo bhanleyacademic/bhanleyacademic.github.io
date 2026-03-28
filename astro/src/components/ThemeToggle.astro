@@ -25,7 +25,7 @@
 		function getTheme() {
 			var stored = localStorage.getItem('theme');
 			if (stored === 'dark' || stored === 'light') return stored;
-			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			return 'light';
 		}
 
 		function applyTheme(theme) {
@@ -76,6 +76,6 @@
 		transition: background 0.2s;
 	}
 	#theme-toggle:hover {
-		background: rgb(var(--gray-light), 0.4);
+		background: rgba(var(--gray-light), 0.4);
 	}
 </style>

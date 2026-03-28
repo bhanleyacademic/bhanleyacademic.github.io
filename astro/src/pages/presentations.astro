@@ -2,32 +2,131 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Image from 'astro:assets';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_TITLE } from '../consts';
+
 const presentations = [
     {course: "INFO-I400 Creativity, Innovation & Tech", presentation_title: "The Cost of Creativity", link:"https://docs.google.com/presentation/d/1WjG7Uu1qqN8in_QAQAFYQSH8yGOr_zhnHcHnQKvsJos/edit?usp=sharing", image: "/the-cost-of-creativity.png"},
     {course: "INFO-I400 Creativity, Innovation & Tech", presentation_title: "Imitators in Streaming Services", link:"https://docs.google.com/presentation/d/1zOvXUreW2UYo2rc7NO4jrsa_WiSOwnKZHoW5AXAGaPc/edit?usp=sharing", image: "/imitators-in-streaming-services.png"},
     {course: "INFO-I400 Creativity, Innovation & Tech", presentation_title: "Consumer-Driven Innovation", link:"https://docs.google.com/presentation/d/1FxGmZJahpn3XRRF0acd3RuvW72GkizlraeTkFnYmtWc/edit?usp=sharing", image: "/consumer-driven-innovation.png"},
     {course: "INFO-I422 Data Visualization", presentation_title: "Azeroth Data", link:"https://docs.google.com/presentation/d/1Xk--4Tch4rgrAE46k9XhEXeAe0wUUZKnTtqfU7YPKIo/edit?usp=sharing", image: "/azeroth-data.png"},
+    {course: "ENGR-E483 Information Visualization", presentation_title: "Mapping & Analyzing Participation in Tutor/Mentor Leadership and Networking Conferences", link:"https://docs.google.com/presentation/d/1APd0qa9zB9J0e4L0QS763cQMhQ7t-uP2r4ZFI5BzdXw/edit?usp=sharing", image: "/mapping-participation.png"}
 ]
 ---
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Presentations | ${SITE_TITLE}`} description="Slides and talks from academic and professional work." />
+		<style>
+			main {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 3em 1em 4em;
+			}
+
+			h1 {
+				font-size: 2em;
+				margin-bottom: 0.15em;
+			}
+
+			.subtitle {
+				font-size: 0.9em;
+				color: rgb(var(--gray));
+				margin-bottom: 2.5rem;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				font-weight: 600;
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1.5rem;
+			}
+
+			.card {
+				display: flex;
+				flex-direction: column;
+				background-color: var(--surface);
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				overflow: hidden;
+				text-decoration: none;
+				color: inherit;
+				transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+			}
+
+			.card:hover {
+				box-shadow: var(--box-shadow);
+				border-color: rgb(var(--gray));
+				transform: translateY(-2px);
+			}
+
+			.card-thumb {
+				width: 100%;
+				aspect-ratio: 16 / 9;
+				object-fit: cover;
+				border-radius: 0;
+				display: block;
+			}
+
+			.card-body {
+				padding: 1rem 1.1rem 1.2rem;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 0.3rem;
+			}
+
+			.card-course {
+				font-size: 0.7em;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				font-weight: 700;
+				color: rgb(var(--gray));
+			}
+
+			.card-title {
+				font-size: 0.95em;
+				font-weight: 600;
+				color: rgb(var(--black));
+				line-height: 1.4;
+				margin: 0;
+			}
+
+			.card-arrow {
+				font-size: 0.8em;
+				color: var(--accent);
+				margin-top: auto;
+				padding-top: 0.5rem;
+			}
+
+			@media (max-width: 640px) {
+				.grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
-        <main>
-            <div class="container">
-                <div class="row">
-                    {presentations.map(presentation => (
-                            <div class="col-6"> <a href={presentation.link} target='_self'><img src={presentation.image} alt={presentation.presentation_title} /><br /><div style="text-align: center">{presentation.course} - {presentation.presentation_title}</div></a></div>
-                    ))}
-                </div>
-            </div>
-        </main>
+		<main>
+			<h1>Presentations</h1>
+			<p class="subtitle">Slides &amp; talks from academic and professional work</p>
 
-        <Footer />
-    </body>
+			<div class="grid">
+				{presentations.map(p => (
+					<a class="card" href={p.link} target="_blank" rel="noopener noreferrer">
+						<img class="card-thumb" src={p.image} alt={p.presentation_title} />
+						<div class="card-body">
+							<p class="card-course">{p.course}</p>
+							<p class="card-title">{p.presentation_title}</p>
+							<p class="card-arrow">View slides →</p>
+						</div>
+					</a>
+				))}
+			</div>
+		</main>
+		<Footer />
+	</body>
 </html>
